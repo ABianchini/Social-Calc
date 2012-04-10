@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, SocialCalcActivity!</string>
     <string name="app_name">Social Calc</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings</string>
 
 </resources>
