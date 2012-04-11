@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="calc_bar">50dp</dimen>
+    <dimen name="delete_bar">45dp</dimen>
+    <dimen name="button_text">35dp</dimen>
+</resources>

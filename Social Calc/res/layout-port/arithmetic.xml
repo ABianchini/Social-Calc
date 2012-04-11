@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/seven"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/eight"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/nine"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/divide"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/four"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/five"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/six"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/multiply"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/one"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/two"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/three"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/subtract"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+	     android:orientation="horizontal"
+	     android:layout_width="fill_parent"
+	     android:layout_height="fill_parent"
+	     android:layout_weight="1" >
+	     <Button
+	         android:layout_height="fill_parent"
+	         android:layout_width="fill_parent"
+	         android:layout_weight="1"
+	         android:text="@string/point"
+	         android:textSize="@dimen/button_text"
+	         android:textColor="@color/white"
+	         android:background="@color/button_grey" />
+	     <Button
+	         android:layout_height="fill_parent"
+	         android:layout_width="fill_parent"
+	         android:layout_weight="1"
+	         android:textSize="@dimen/button_text"
+	         android:textColor="@color/white"
+	         android:text="@string/zero"
+	         android:background="@color/button_grey"
+	         android:onClick="onZeroClick" />
+	     <Button
+	         android:layout_height="fill_parent"
+	         android:layout_width="fill_parent"
+	         android:layout_weight="1"
+	         android:textSize="@dimen/button_text"
+	         android:textColor="@color/white"
+	         android:text="@string/equals"
+	         android:background="@color/button_dark_grey" />
+	     <Button
+	         android:layout_height="fill_parent"
+	         android:layout_width="fill_parent"
+	         android:textSize="@dimen/button_text"
+	         android:textColor="@color/white"
+	         android:layout_weight="1"
+	         android:text="@string/plus"
+	         android:background="@color/button_dark_grey" />
+	</LinearLayout>
+
+</LinearLayout>

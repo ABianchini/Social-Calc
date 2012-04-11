@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/black" >
+    <TextView
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableBottom="@color/grey"
+        android:text="@string/start_calc"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/calc_bar"
+        android:gravity="right" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/delete_bar"
+        android:orientation="horizontal" >
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/share"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/more"
+            android:background="@color/button_grey" />
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:text="@string/delete"
+            android:layout_weight="1"
+            android:onClick="onDeleteClick"
+            android:textColor="@color/white"
+            android:background="@color/button_grey" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/arithmeticFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.advancementbureau.socialcalc.ArithmeticFragment" ></fragment>
+</LinearLayout>

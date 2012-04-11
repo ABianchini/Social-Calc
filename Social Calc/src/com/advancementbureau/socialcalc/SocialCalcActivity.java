@@ -1,10 +1,14 @@
 package com.advancementbureau.socialcalc;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class SocialCalcActivity extends Activity {
     /** Called when the activity is first created. */
@@ -30,5 +34,19 @@ public class SocialCalcActivity extends Activity {
     	if (item.getItemId() == R.id.help_menu_item) {
 			startActivity(item.getIntent()); }
     	return true;
+    }
+    
+    public void onDeleteClick(View v) {
+		
+	}
+    
+    public void PopUp(int title, int message){
+        new AlertDialog.Builder(this)
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton("Close", new OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+            }
+        }).show();
     }
 }
