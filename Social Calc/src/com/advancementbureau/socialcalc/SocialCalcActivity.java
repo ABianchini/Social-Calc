@@ -1,5 +1,7 @@
 package com.advancementbureau.socialcalc;
 
+import com.advancementbureau.socialcalc.ArithmeticFragment.OnButtonSelectedListener;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,12 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 public class SocialCalcActivity extends Activity {
 	
-	TextView calcView = (TextView) findViewById(R.id.calc_bar);
+	//TextView calcView = (TextView) findViewById(R.id.calc_bar);
+	OnButtonSelectedListener mListener;
 	public static String calcBar = "";
     /** Called when the activity is first created. */
     @Override
@@ -21,6 +22,9 @@ public class SocialCalcActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+    
+    
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,9 +44,11 @@ public class SocialCalcActivity extends Activity {
     	return true;
     }
     
-    public void onDeleteClick(View v) {
-		
-	}
+    public void onButtonSelected(int id) {
+    	if (id == 0) {
+    		PopUp(R.string.eight, R.string.delete);
+    	}
+    }
     
     public void PopUp(int title, int message){
         new AlertDialog.Builder(this)
