@@ -9,7 +9,6 @@
         android:layout_height="fill_parent"
         android:layout_weight="1" >
         <Button
-            android:id="@+id/sevenButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -18,7 +17,6 @@
             android:textColor="@color/white"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/eightButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -27,7 +25,6 @@
             android:text="@string/eight"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/nineButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -50,7 +47,6 @@
         android:layout_height="fill_parent"
         android:layout_weight="1" >
         <Button
-            android:id="@+id/fourButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -59,7 +55,6 @@
             android:textColor="@color/white"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/fiveButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -68,7 +63,6 @@
             android:text="@string/five"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/sixButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -91,7 +85,6 @@
         android:layout_height="fill_parent"
         android:layout_weight="1" >
         <Button
-            android:id="@+id/oneButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -100,7 +93,6 @@
             android:textColor="@color/white"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/twoButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -109,7 +101,6 @@
             android:text="@string/two"
             android:background="@color/button_grey" />
         <Button
-            android:id="@+id/threeButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -132,7 +123,6 @@
 	     android:layout_height="fill_parent"
 	     android:layout_weight="1" >
 	     <Button
-	         android:id="@+id/pointButton"
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"
 	         android:layout_weight="1"
@@ -141,7 +131,7 @@
 	         android:textColor="@color/white"
 	         android:background="@color/button_grey" />
 	     <Button
-	         android:id="@+id/zeroButton"
+	         android:id="@+id/buttonZero"
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"
 	         android:layout_weight="1"
