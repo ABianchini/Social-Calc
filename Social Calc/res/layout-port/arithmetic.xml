@@ -36,6 +36,7 @@
             android:text="@string/nine"
             android:background="@color/button_grey" />
         <Button
+            android:id="@+id/divideButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:textSize="@dimen/button_text"
@@ -77,6 +78,7 @@
             android:text="@string/six"
             android:background="@color/button_grey" />
         <Button
+            android:id="@+id/multiplyButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:textSize="@dimen/button_text"
@@ -118,6 +120,7 @@
             android:text="@string/three"
             android:background="@color/button_grey" />
         <Button
+            android:id="@+id/subtractButton"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:textSize="@dimen/button_text"
@@ -150,6 +153,7 @@
 	         android:text="@string/zero"
 	         android:background="@color/button_grey" />
 	     <Button
+	         android:id="@+id/equalsButton"
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"
 	         android:layout_weight="1"
@@ -158,12 +162,13 @@
 	         android:text="@string/equals"
 	         android:background="@color/button_dark_grey" />
 	     <Button
+	         android:id="@+id/addButton"
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"
 	         android:textSize="@dimen/button_text"
 	         android:textColor="@color/white"
 	         android:layout_weight="1"
-	         android:text="@string/plus"
+	         android:text="@string/add"
 	         android:background="@color/button_dark_grey" />
 	</LinearLayout>
 

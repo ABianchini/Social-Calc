@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 public class ArithmeticFragment extends Fragment{
 	
@@ -15,12 +14,12 @@ public class ArithmeticFragment extends Fragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Button zeroButton = (Button) getView().findViewById(R.id.buttonZero);
+		/*Button zeroButton = (Button) getView().findViewById(R.id.buttonZero);
 		zeroButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				
 			}
-		});
+		});*/
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class ArithmeticFragment extends Fragment{
 		return view;
 	}
 	
-	public void onZeroClick(View v) {
+	/*public void onZeroClick(View v) {
 		if (v.getId() == R.id.buttonZero) {
 			Button zeroButton = (Button) getView().findViewById(R.id.buttonZero);
 			zeroButton.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +42,5 @@ public class ArithmeticFragment extends Fragment{
 				}
 			});
 		}
-	}
+	}*/
 }

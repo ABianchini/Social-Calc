@@ -13,7 +13,8 @@
         android:text="@string/start_calc"
         android:textColor="@color/grey"
         android:textSize="@dimen/calc_bar"
-        android:gravity="right" />
+        android:gravity="right"
+        android:maxLength="10" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/delete_bar"
@@ -28,6 +29,7 @@
             android:background="@color/button_grey" />
         <Button
             android:id="@+id/moreButton"
+            android:onClick="onMoreClick"
             android:layout_height="match_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"

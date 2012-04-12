@@ -19,6 +19,14 @@ import android.widget.Toast;
 public class SocialCalcActivity extends Activity {
 	
 	public static String calcString = "";
+	public static double x;
+	public static double y;
+	public static double z;
+	public static int operation = 0;
+	public static double addOp;
+	public static double subOp;
+	public static double multOp;
+	public static double divOp;
 	
 	
     /** Called when the activity is first created. */
@@ -51,11 +59,78 @@ public class SocialCalcActivity extends Activity {
     		Button sevenButton = (Button) v.findViewById(R.id.sevenButton);
     		Button eightButton = (Button) v.findViewById(R.id.eightButton);
     		Button nineButton = (Button) v.findViewById(R.id.nineButton);
+    		Button pointButton = (Button) v.findViewById(R.id.pointButton);
+    		Button addButton = (Button) v.findViewById(R.id.addButton);
+    		Button subtractButton = (Button) v.findViewById(R.id.subtractButton);
+    		Button multiplyButton = (Button) v.findViewById(R.id.multiplyButton);
+    		Button divideButton = (Button) v.findViewById(R.id.divideButton);
+    		Button equalsButton = (Button) v.findViewById(R.id.equalsButton);
+    		divideButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				divOp = x;
+    				calcString = "";
+    				calcView.setText(calcString);
+    				operation = 4;
+    			}
+    		});
+    		multiplyButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				multOp = x;
+    				calcString = "";
+    				calcView.setText(calcString);
+    				operation = 3;
+    			}
+    		});
+    		addButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				addOp = x;
+    				calcString = "";
+    				calcView.setText(calcString);
+    				operation = 1;
+    			}
+    		});
+    		subtractButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				subOp = x;
+    				calcString = "";
+    				calcView.setText(calcString);
+    				operation = 2;
+    			}
+    		});
+    		equalsButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				double tempCalc;
+    				if (operation == 1) {
+    					tempCalc = addOp + Double.parseDouble(calcString);
+    					calcString = Double.toString(tempCalc);
+    				}
+    				if (operation == 2) {
+    					tempCalc = subOp - Double.parseDouble(calcString);
+    					calcString = Double.toString(tempCalc);
+    				}
+    				if (operation == 3) {
+    					tempCalc = multOp * Double.parseDouble(calcString);
+    					calcString = Double.toString(tempCalc);
+    				}
+    				if (operation == 4) {
+    					tempCalc = divOp / Double.parseDouble(calcString);
+    					calcString = Double.toString(tempCalc);
+    				}
+    				calcView.setText(calcString);
+    				storeCalc(calcString);
+    			}
+    		});
     		zeroButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "0";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		oneButton.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +138,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "1";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		twoButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +146,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "2";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		threeButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +154,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "3";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		fourButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +162,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "4";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		fiveButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +170,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "5";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		sixButton.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +178,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "6";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		sevenButton.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +186,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "7";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		eightButton.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +194,7 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "8";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		nineButton.setOnClickListener(new View.OnClickListener() {
@@ -119,12 +202,26 @@ public class SocialCalcActivity extends Activity {
     				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     				calcString = calcView.getText().toString() + "9";
     				calcView.setText(calcString);
+    				storeCalc(calcString);
+    			}
+    		});
+    		pointButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + ".";
+    				calcView.setText(calcString);
+    				storeCalc(calcString);
     			}
     		});
     		return v;
     	}
     }
     
+    public static void storeCalc(String input) {
+    	z = y;
+    	y = x;
+    	x = Double.parseDouble(input);
+    }
     
     
 
@@ -161,7 +258,9 @@ public class SocialCalcActivity extends Activity {
     public void onDeleteClick(View v) {
     	TextView calcView = (TextView) findViewById(R.id.calc_bar);
     	calcString = calcView.getText().toString();
-    	calcString = calcString.substring(0, calcString.length()-1);
+    	if (!calcString.equals("")) {
+    		calcString = calcString.substring(0, calcString.length()-1);
+    	}
     	calcView.setText(calcString);
     }
     public void onMoreClick(View v) {
