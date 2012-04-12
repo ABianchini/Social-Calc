@@ -2,34 +2,52 @@ package com.advancementbureau.socialcalc;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.advancementbureau.socialcalc.ArithmeticFragment.OnButtonSelectedListener;
-
-public class SocialCalcActivity extends Activity implements OnButtonSelectedListener {
+public class SocialCalcActivity extends Activity {
 	
-	TextView calcView = (TextView) findViewById(R.id.calc_bar);
-	OnButtonSelectedListener mListener;
 	public static String calcBar = "";
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        //FragmentManager fm = getFragmentManager();
+        //addShowHideListener(R.id.moreButton, fm.findFragmentById(R.id.arithmeticFragment));
+    }
+
+    public static class ArithmeticFragment extends Fragment {
+    	
+    	@Override
+    	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    		View v = inflater.inflate(R.layout.arithmetic, container, false);
+    		Button zeroButton = (Button) v.findViewById(R.id.buttonZero);
+    		final TextView calcBar = (TextView) getActivity().findViewById(R.id.calc_bar);
+    		zeroButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				calcBar.setText("0");
+    			}
+    		});
+    		return v;
+    	}
     }
     
     
     
-    
-    @Override
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	super.onCreateOptionsMenu(menu);
     	getMenuInflater().inflate(R.menu.mainoptions, menu);
@@ -46,13 +64,6 @@ public class SocialCalcActivity extends Activity implements OnButtonSelectedList
 			startActivity(item.getIntent()); }
     	return true;
     }
-    
-    public void onButtonSelected(int id) {
-    	if (id == 0) {
-    		PopUp(R.string.eight, R.string.delete);
-    	}
-    }
-    
     public void PopUp(int title, int message){
         new AlertDialog.Builder(this)
         .setTitle(title)
@@ -61,11 +72,5 @@ public class SocialCalcActivity extends Activity implements OnButtonSelectedList
             public void onClick(DialogInterface arg0, int arg1) {
             }
         }).show();
-    }
-    public void onDeleteClick(View v) {
-    	Toast.makeText(this, "DELETE", 1000).show();
-    }
-    public void setText(String input) {
-    	calcView.setText(input);
     }
 }

@@ -4,16 +4,23 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-public class ArithmeticFragment extends Fragment implements OnClickListener {
+public class ArithmeticFragment extends Fragment{
 	
 	//OnButtonSelectedListener mListener;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Button zeroButton = (Button) getView().findViewById(R.id.buttonZero);
+		zeroButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				
+			}
+		});
 	}
 
 	@Override
@@ -27,36 +34,14 @@ public class ArithmeticFragment extends Fragment implements OnClickListener {
 		return view;
 	}
 	
-	public interface OnButtonSelectedListener {
-		void onButtonSelected(int id);
-	}
-	/*
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mListener = (OnButtonSelectedListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + "must implement OnButtonSelectedListener");
-		}
-	}*/
-	
-	
-	
-	public void onClickZero(View v) {
-		
-	}
-
-	public void onClick(View v) {
-		// TODO cast it to activity to the name of your activity
-	}
-	
-	/*
 	public void onZeroClick(View v) {
-		TextView calcView = (TextView) ((Activity) mContext).findViewById(R.id.calc_bar);
-		//mListener.onButtonSelected(0);
-		SocialCalcActivity.calcBar = calcView.getText().toString();
-		SocialCalcActivity.calcBar = SocialCalcActivity.calcBar + "0";
-		calcView.setText(SocialCalcActivity.calcBar);
-	}*/
+		if (v.getId() == R.id.buttonZero) {
+			Button zeroButton = (Button) getView().findViewById(R.id.buttonZero);
+			zeroButton.setOnClickListener(new View.OnClickListener() {
+				public void onClick(View v) {
+					
+				}
+			});
+		}
+	}
 }

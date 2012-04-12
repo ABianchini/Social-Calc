@@ -138,8 +138,7 @@
 	         android:textSize="@dimen/button_text"
 	         android:textColor="@color/white"
 	         android:text="@string/zero"
-	         android:background="@color/button_grey"
-	         android:onClick="onZeroClick" />
+	         android:background="@color/button_grey" />
 	     <Button
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"

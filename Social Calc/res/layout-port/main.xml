@@ -26,6 +26,7 @@
             android:text="@string/share"
             android:background="@color/button_grey" />
         <Button
+            android:id="@+id/moreButton"
             android:layout_height="match_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
@@ -41,10 +42,9 @@
             android:textColor="@color/white"
             android:background="@color/button_grey" />
     </LinearLayout>
-
     <fragment
+    	android:name="com.advancementbureau.socialcalc.SocialCalcActivity$ArithmeticFragment"
         android:id="@+id/arithmeticFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.advancementbureau.socialcalc.ArithmeticFragment" ></fragment>
+        android:layout_height="match_parent" ></fragment>
 </LinearLayout>
