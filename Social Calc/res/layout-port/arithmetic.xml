@@ -131,6 +131,7 @@
 	         android:textColor="@color/white"
 	         android:background="@color/button_grey" />
 	     <Button
+	         android:id="@+id/buttonZero"
 	         android:layout_height="fill_parent"
 	         android:layout_width="fill_parent"
 	         android:layout_weight="1"

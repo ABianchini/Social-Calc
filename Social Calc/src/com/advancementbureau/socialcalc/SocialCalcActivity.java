@@ -1,7 +1,5 @@
 package com.advancementbureau.socialcalc;
 
-import com.advancementbureau.socialcalc.ArithmeticFragment.OnButtonSelectedListener;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,10 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class SocialCalcActivity extends Activity {
+import com.advancementbureau.socialcalc.ArithmeticFragment.OnButtonSelectedListener;
+
+public class SocialCalcActivity extends Activity implements OnButtonSelectedListener {
 	
-	//TextView calcView = (TextView) findViewById(R.id.calc_bar);
+	TextView calcView = (TextView) findViewById(R.id.calc_bar);
 	OnButtonSelectedListener mListener;
 	public static String calcBar = "";
     /** Called when the activity is first created. */
@@ -58,5 +61,11 @@ public class SocialCalcActivity extends Activity {
             public void onClick(DialogInterface arg0, int arg1) {
             }
         }).show();
+    }
+    public void onDeleteClick(View v) {
+    	Toast.makeText(this, "DELETE", 1000).show();
+    }
+    public void setText(String input) {
+    	calcView.setText(input);
     }
 }
