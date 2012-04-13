@@ -101,11 +101,11 @@ public class SocialCalcActivity extends Activity {
     		double work3;
     		double work4;
     		double work5;
-    		double num1;
-    		double num2;
-    		double num3;
-    		double num4;
-    		double num5;
+    		double num1 = 1;
+    		double num2 = 1;
+    		double num3 = 1;
+    		double num4 = 1;
+    		double num5 = 1;
     		int op1 = 13;
     		int op2 = 13;
     		int op3 = 13;
@@ -149,7 +149,7 @@ public class SocialCalcActivity extends Activity {
     		}
     		if (op1 != 13) {
 	    		if (calcPieces[op1] == 'a') {
-	    			//work1 = num1 + num2;
+	    			work1 = num1 + num2;
 	    		}
     		}
     		
