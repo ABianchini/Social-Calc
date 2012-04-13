@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black" >
+    android:gravity="center_horizontal"
+    android:background="@color/button_grey" >
     <TextView
         android:id="@+id/calc_bar"
         android:singleLine="true"
@@ -14,7 +15,8 @@
         android:textColor="@color/grey"
         android:textSize="@dimen/calc_bar"
         android:gravity="right"
-        android:maxLength="10" />
+        android:maxLength="10"
+        android:background="@color/black" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/delete_bar"
@@ -49,5 +51,10 @@
     	android:name="com.advancementbureau.socialcalc.SocialCalcActivity$ArithmeticFragment"
         android:id="@+id/arithmeticFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" ></fragment>
+        android:layout_height="fill_parent" ></fragment>
+    <fragment
+    	android:name="com.advancementbureau.socialcalc.SocialCalcActivity$AdvancedFragment"
+        android:id="@+id/advancedFragment"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" ></fragment>
 </LinearLayout>

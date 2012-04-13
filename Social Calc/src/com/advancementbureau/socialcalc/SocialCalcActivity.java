@@ -46,25 +46,44 @@ public class SocialCalcActivity extends Activity {
         		return true;
         	}
         });
-        /*Button moreButton = (Button) findViewById(R.id.moreButton);
+        
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+		FragmentManager fm = getFragmentManager();
+		final Fragment arithmeticFragment = fm.findFragmentById(R.id.arithmeticFragment);
+		final Fragment advancedFragment = fm.findFragmentById(R.id.advancedFragment);
+		ft.show(arithmeticFragment);
+		ft.hide(advancedFragment);
+		ft.commit();
+		
+        final Button moreButton = (Button) findViewById(R.id.moreButton);
         moreButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
 				FragmentManager fm = getFragmentManager();
 				Fragment arithmeticFragment = fm.findFragmentById(R.id.arithmeticFragment);
+				Fragment advancedFragment = fm.findFragmentById(R.id.advancedFragment);
 				if (arithmeticFragment.isHidden()) {
 					ft.show(arithmeticFragment);
-					
+					ft.hide(advancedFragment);
+					changeMoreButton(1);
+				} else {
+					ft.show(advancedFragment);
+					ft.hide(arithmeticFragment);
+					changeMoreButton(2);
 				}
-				
-				PopUp(R.string.more, R.string.five, R.drawable.help);
+				ft.commit();
 			}
-		});*/
+		});
+        
     }
     
     public static class AdvancedFragment extends Fragment {
-    	
+    	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    		View v = inflater.inflate(R.layout.advanced, container, false);
+    		return v;
+    	}
     }
 
     public static class ArithmeticFragment extends Fragment {
@@ -298,9 +317,13 @@ public class SocialCalcActivity extends Activity {
     public void onDeleteClick(View v) {
     	TextView calcView = (TextView) findViewById(R.id.calc_bar);
     	calcString = calcView.getText().toString();
-    	if (!calcString.equals("")) {
-    		calcString = calcString.substring(0, calcString.length()-1);
-    		storeCalc(calcString);
+    	if (calcString.length() > 1) {
+	    	if (!calcString.equals("")) {
+	    		calcString = calcString.substring(0, calcString.length()-1);
+	    		storeCalc(calcString);
+	    	}
+    	} else {
+    		calcString = "";
     	}
     	calcView.setText(calcString);
     }
@@ -312,6 +335,16 @@ public class SocialCalcActivity extends Activity {
     	calcString = "";
 		calcView.setText(calcString);
 		storeCalc("0");
+    }
+    
+    public void changeMoreButton(int id) {
+    	Button moreButton = (Button) findViewById(R.id.moreButton);
+    	if (id == 1) {
+    		moreButton.setText("MORE");
+    	}
+    	if (id == 2) {
+    		moreButton.setText("BACK");
+    	}
     }
     
  }
