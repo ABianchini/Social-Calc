@@ -2,11 +2,13 @@ package com.advancementbureau.socialcalc;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SocialCalcActivity extends Activity {
 	
@@ -45,7 +46,25 @@ public class SocialCalcActivity extends Activity {
         		return true;
         	}
         });
-        
+        /*Button moreButton = (Button) findViewById(R.id.moreButton);
+        moreButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+				FragmentManager fm = getFragmentManager();
+				Fragment arithmeticFragment = fm.findFragmentById(R.id.arithmeticFragment);
+				if (arithmeticFragment.isHidden()) {
+					ft.show(arithmeticFragment);
+					
+				}
+				
+				PopUp(R.string.more, R.string.five, R.drawable.help);
+			}
+		});*/
+    }
+    
+    public static class AdvancedFragment extends Fragment {
+    	
     }
 
     public static class ArithmeticFragment extends Fragment {
@@ -285,9 +304,7 @@ public class SocialCalcActivity extends Activity {
     	}
     	calcView.setText(calcString);
     }
-    public void onMoreClick(View v) {
-    	Toast.makeText(this, "Not yet...", 1000).show();
-    }
+    
     @Override
     protected void onDestroy() {
     	super.onDestroy();

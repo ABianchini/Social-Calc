@@ -29,7 +29,6 @@
             android:background="@color/button_grey" />
         <Button
             android:id="@+id/moreButton"
-            android:onClick="onMoreClick"
             android:layout_height="match_parent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
