@@ -116,18 +116,19 @@ public class SocialCalcActivity extends Activity {
     		double work1 = 0;
     		double work2 = 0;
     		double work3 = 0;
-    		double work4 = 0;
     		double num1 = 1;
     		double num2 = 1;
     		double num3 = 1;
     		double num4 = 1;
-    		double num5 = 1;
     		int ops = 0;
     		int op1 = 13;
     		int op2 = 13;
     		int op3 = 13;
-    		int op4 = 13;
     		double endAnswer = 0;
+    		
+    		if(calcs.length() == 1) {
+    			endAnswer = Double.parseDouble(calcs.substring(0,1));
+    		}
     		
     		if(!calcs.equals("")) {
     			char[] calcPieces = calcs.toCharArray();
@@ -161,15 +162,6 @@ public class SocialCalcActivity extends Activity {
 	    	    						op3 = k;
 	    	    						num3 = Double.parseDouble(calcs.substring(op2+1, op3));
 	    	    						if (ops == 3) break calcLoop1;
-	    	    						
-	    	    						for (int l = op3+1; l < calcPieces1.length; l++) {
-	    	    	    					char current4 = calcPieces1[l];
-	    	    	    					if (current4 == 'a' || current4 == 's' || current4 == 'm' || current4 == 'd') {
-	    	    	    						op4 = l;
-	    	    	    						num4 = Double.parseDouble(calcs.substring(op3+1, op4));
-	    	    	    						if (ops == 4) break calcLoop1;
-	    	    	    					}
-	    	    	    				}
 	    	    					}
 	    	    				}
 	    					}
@@ -249,7 +241,7 @@ public class SocialCalcActivity extends Activity {
 	    			}
 		    		endAnswer = work2;
 	    		}
-	    		//TODO FIX THE ALGORITHM!!!
+	    		//TODO fix and test
 	    		op3IfState:
 	    		if (ops == 3) {
 	    			num1 = Double.parseDouble(calcs.substring(0, op1));
@@ -347,8 +339,29 @@ public class SocialCalcActivity extends Activity {
 			    		}
 			    		}
 		    		}
-	    			//its all right up to here
-	    			//you need a case for op3 being m or d and everything else being a and s
+	    			if (calcPieces1[op3] == 'm' || calcPieces1[op3] == 'd') {
+		    			if (calcPieces1[op3] == 'd') {
+			    			work3 = num3 / num4;
+			    		}if (calcPieces1[op3] == 'm') {
+			    			work3 = num3 * num4;
+			    		}
+			    		if (calcPieces1[op1] == 'a' || calcPieces1[op1] == 's') {
+			    			if (calcPieces1[op1] == 'a') {
+				    			work1 = num1 + num2;
+				    		}if (calcPieces1[op1] == 's') {
+				    			work1 = num1 - num2;
+				    		}
+				    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+				    			if (calcPieces1[op2] == 'a') {
+					    			work2 = work1 + work3;
+					    		}if (calcPieces1[op2] == 's') {
+					    			work2 = work1 - work3;
+					    		}
+				    		}
+				    		endAnswer = work2;
+				    		break op3IfState;
+			    		}
+		    		}
 	    			if (calcPieces1[op1] == 's' || calcPieces1[op1] == 'a') {
 		    			if (calcPieces1[op1] == 'a') {
 			    			work1 = num1 + num2;
@@ -361,55 +374,24 @@ public class SocialCalcActivity extends Activity {
 				    		}if (calcPieces1[op2] == 's') {
 				    			work2 = work1 - num3;
 				    		}
+				    		if (calcPieces1[op3] == 'a' || calcPieces1[op3] == 's') {
+				    			if (calcPieces1[op3] == 'a') {
+					    			work3 = work2 + num4;
+					    		}if (calcPieces1[op3] == 's') {
+					    			work3 = work2 - num4;
+					    		}
+				    		}
 			    		}
 	    			}
 	    			
 		    		endAnswer = work3;
-	    		}/*
+	    		}
 	    		if (ops == 4) {
-	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
-	    			if (calcPieces1[op1] == 'a') {
-		    			work1 = num1 + num2;
-		    		}if (calcPieces1[op1] == 's') {
-		    			work1 = num1 - num2;
-		    		}if (calcPieces1[op1] == 'm') {
-		    			work1 = num1 * num2;
-		    		}if (calcPieces1[op1] == 'd') {
-		    			work1 = num1 / num2;
-		    		}
-		    		endAnswer = work1;
-	    			num3 = Double.parseDouble(calcs.substring(op2+1, op3));
-	    			if (calcPieces1[op2] == 'a') {
-		    			work2 = work1 + num3;
-		    		}if (calcPieces1[op2] == 's') {
-		    			work2 = work1 - num3;
-		    		}if (calcPieces1[op2] == 'm') {
-		    			work2 = work1 * num3;
-		    		}if (calcPieces1[op2] == 'd') {
-		    			work2 = work1 / num3;
-		    		}
-		    		endAnswer = work2;
-	    			num4 = Double.parseDouble(calcs.substring(op3+1, op4));
-	    			if (calcPieces1[op3] == 'a') {
-		    			work3 = work2 + num4;
-		    		}if (calcPieces1[op3] == 's') {
-		    			work3 = work2 - num4;
-		    		}if (calcPieces1[op3] == 'm') {
-		    			work3 = work2 * num4;
-		    		}if (calcPieces1[op3] == 'd') {
-		    			work3 = work2 / num4;
-		    		}
-		    		num5 = Double.parseDouble(calcs.substring(op4+1, calcs.length()));
-	    			if (calcPieces1[op4] == 'a') {
-		    			work4 = work3 + num5;
-		    		}if (calcPieces1[op4] == 's') {
-		    			work4 = work3 - num5;
-		    		}if (calcPieces1[op4] == 'm') {
-		    			work4 = work3 * num5;
-		    		}if (calcPieces1[op4] == 'd') {
-		    			work4 = work3 / num5;
-		    		}
-		    		endAnswer = work4;
+	    			endAnswer = 0;
+	    		}/*
+	    		if (ops == 5) {
+	    			calcString = "";
+	    			calcs = "";
 	    		}*/
 	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
 	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
