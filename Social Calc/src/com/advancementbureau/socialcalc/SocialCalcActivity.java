@@ -189,30 +189,73 @@ public class SocialCalcActivity extends Activity {
 		    		}
 		    		endAnswer = work1;
 	    		}
+	    		op2IfState:
 	    		if (ops == 2) {
+	    			num1 = Double.parseDouble(calcs.substring(0, op1));
 	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
-	    			if (calcPieces1[op1] == 'a') {
-		    			work1 = num1 + num2;
-		    		}if (calcPieces1[op1] == 's') {
-		    			work1 = num1 - num2;
-		    		}if (calcPieces1[op1] == 'm') {
-		    			work1 = num1 * num2;
-		    		}if (calcPieces1[op1] == 'd') {
-		    			work1 = num1 / num2;
-		    		}
-		    		endAnswer = work1;
 	    			num3 = Double.parseDouble(calcs.substring(op2+1, calcs.length()));
-	    			if (calcPieces1[op2] == 'a') {
-		    			work2 = work1 + num3;
-		    		}if (calcPieces1[op2] == 's') {
-		    			work2 = work1 - num3;
-		    		}if (calcPieces1[op2] == 'm') {
-		    			work2 = work1 * num3;
-		    		}if (calcPieces1[op2] == 'd') {
-		    			work2 = work1 / num3;
+	    			if (calcPieces1[op1] == 'm' || calcPieces1[op1] == 'd') {
+		    			if (calcPieces1[op1] == 'm') {
+			    			work1 = num1 * num2;
+			    		}if (calcPieces1[op1] == 'd') {
+			    			work1 = num1 / num2;
+			    		}
+			    		if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
+			    			if (calcPieces1[op2] == 'm') {
+				    			work2 = work1 * num3;
+				    		}if (calcPieces1[op2] == 'd') {
+				    			work2 = work1 / num3;
+				    		}
+			    		}
+			    		
+			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+			    			if (calcPieces1[op2] == 'a') {
+				    			work2 = work1 + num3;
+				    		}if (calcPieces1[op2] == 's') {
+				    			work2 = work1 - num3;
+				    		}
+			    		}
 		    		}
+	    			
+	    			if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
+		    			if (calcPieces1[op2] == 'm') {
+			    			work2 = num2 * num3;
+			    		}if (calcPieces1[op2] == 'd') {
+			    			work2 = num2 / num3;
+			    		}
+			    		if (calcPieces1[op1] == 'a' || calcPieces1[op1] == 's') {
+			    			if (calcPieces1[op1] == 'a') {
+				    			work1 = num1 + work2;
+				    		}if (calcPieces1[op1] == 's') {
+				    			work1 = num1 - work2;
+				    		}
+				    		endAnswer = work1;
+				    		break op2IfState;
+			    		}
+		    		}
+	    			if (calcPieces1[op1] == 's' || calcPieces1[op1] == 'a') {
+		    			if (calcPieces1[op1] == 'a') {
+			    			work1 = num1 + num2;
+			    		}if (calcPieces1[op1] == 's') {
+			    			work1 = num1 - num2;
+			    		}
+			    		if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
+			    			if (calcPieces1[op2] == 'm') {
+				    			work2 = work1 * num3;
+				    		}if (calcPieces1[op2] == 'd') {
+				    			work2 = work1 * num3;
+				    		}
+			    		}
+			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+			    			if (calcPieces1[op2] == 'a') {
+				    			work2 = work1 + num3;
+				    		}if (calcPieces1[op2] == 's') {
+				    			work2 = work1 - num3;
+				    		}
+			    		}
+	    			}
 		    		endAnswer = work2;
-	    		}
+	    		}/*
 	    		if (ops == 3) {
 	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
 	    			if (calcPieces1[op1] == 'a') {
@@ -292,7 +335,7 @@ public class SocialCalcActivity extends Activity {
 		    			work4 = work3 / num5;
 		    		}
 		    		endAnswer = work4;
-	    		}
+	    		}*/
 	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
 	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
 	    		shareString = calcString + " = " + endAnswer;
