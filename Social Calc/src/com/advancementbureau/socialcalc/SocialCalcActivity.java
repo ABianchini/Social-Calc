@@ -22,17 +22,13 @@ import android.widget.TextView;
 public class SocialCalcActivity extends Activity {
 	
 	public static final String GAME_PREFERENCES = "GamePrefs";
-	public static final String CALCS = "boot";
+	public static final String CALCS = "calcs";
+	public static final String CALCSTRING = "show";
 	SharedPreferences mGameSettings;
 	public static String calcString = "";
 	public static double x;
 	public static double y;
 	public static double z;
-	public static int operation = 0;
-	public static double addOp;
-	public static double subOp;
-	public static double multOp;
-	public static double divOp;
 	public static String shareString;
 	public static String calcs = "";
 	
@@ -49,9 +45,18 @@ public class SocialCalcActivity extends Activity {
         		calcString = "";
         		calcView.setText(calcString);
         		storeCalc("0");
+        		calcs = "";
         		return true;
         	}
         });
+        mGameSettings = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
+        if (mGameSettings.contains(CALCS)) {
+			calcs = mGameSettings.getString(CALCS, "");
+		}
+        if (mGameSettings.contains(CALCSTRING)) {
+			calcString = mGameSettings.getString(CALCSTRING, "");
+		}
+        calcView.setText(calcString);
         
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
@@ -93,66 +98,193 @@ public class SocialCalcActivity extends Activity {
     }
 
     public static class ArithmeticFragment extends Fragment {
-    	//TODO A TON OF STUFF!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    	
     	public void calculate() {
-        	//TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    		double work1;
-    		double work2;
-    		double work3;
-    		double work4;
-    		double work5;
+        	TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    		double work1 = 0;
+    		double work2 = 0;
+    		double work3 = 0;
+    		double work4 = 0;
     		double num1 = 1;
     		double num2 = 1;
     		double num3 = 1;
     		double num4 = 1;
     		double num5 = 1;
+    		int ops = 0;
     		int op1 = 13;
     		int op2 = 13;
     		int op3 = 13;
     		int op4 = 13;
-    		int op5 = 13;
-    		char[] calcPieces = calcs.toCharArray();
-    		for (int i = 0; i < calcPieces.length; i++) {
-    			char current = calcPieces[i];
-    			if (!Character.isDigit(current)) {
-    				op1 = i;
-    				num1 = Integer.parseInt(calcs.substring(0, op1+1));
-    				for (int j = op1; j < calcPieces.length; j++) {
-    					char current2 = calcPieces[j];
-    					if (!Character.isDigit(current2)) {
-    						op2 = j;
-    						num2 = Integer.parseInt(calcs.substring(op1+1, op2 +1));
-    						for (int k = op1; k < calcPieces.length; k++) {
-    	    					char current3 = calcPieces[k];
-    	    					if (!Character.isDigit(current3)) {
-    	    						op3 = k;
-    	    						num3 = Integer.parseInt(calcs.substring(op2+1, op3 +1));
-    	    						for (int l = op1; l < calcPieces.length; l++) {
-    	    	    					char current4 = calcPieces[l];
-    	    	    					if (!Character.isDigit(current4)) {
-    	    	    						op4 = l;
-    	    	    						num4 = Integer.parseInt(calcs.substring(op3+1, op4+1));
-    	    	    						for (int m = op1; m < calcPieces.length; m++) {
-    	    	    	    					char current5 = calcPieces[m];
-    	    	    	    					if (!Character.isDigit(current5)) {
-    	    	    	    						op5 = m;
-    	    	    	    						num5 = Integer.parseInt(calcs.substring(op4+1, op5+1));
-    	    	    	    					}
-    	    	    	    				}
-    	    	    					}
-    	    	    				}
-    	    					}
-    	    				}
-    					}
+    		double endAnswer = 0;
+    		
+    		if(!calcs.equals("")) {
+    			char[] calcPieces = calcs.toCharArray();
+    			for (int i = 0; i < calcPieces.length; i++) {
+    				char current = calcPieces[i];
+    				if (current == 'a' || current == 's' || current == 'm' || current == 'd') {
+    					ops++;
     				}
     			}
     		}
-    		if (op1 != 13) {
-	    		if (calcPieces[op1] == 'a') {
-	    			work1 = num1 + num2;
-	    		}
-    		}
     		
+    		if (!calcs.equals("")) {
+	    		char[] calcPieces1 = calcs.toCharArray();
+	    		calcLoop1:
+	    		for (int i = 0; i < calcPieces1.length; i++) {
+	    			char current = calcPieces1[i];
+	    			if (current == 'a' || current == 's' || current == 'm' || current == 'd') {
+	    				op1 = i;
+	    				num1 = Double.parseDouble(calcs.substring(0, op1));
+	    				
+	    				for (int j = op1+1; j < calcPieces1.length; j++) {
+	    					char current2 = calcPieces1[j];
+	    					if (current2 == 'a' || current2 == 's' || current2 == 'm' || current2 == 'd') {
+	    						op2 = j;
+	    						num2 = Double.parseDouble(calcs.substring(op1+1, op2));
+	    						if (ops == 2) break calcLoop1;
+	    						
+	    						for (int k = op2+1; k < calcPieces1.length; k++) {
+	    	    					char current3 = calcPieces1[k];
+	    	    					if (current3 == 'a' || current3 == 's' || current3 == 'm' || current3 == 'd') {
+	    	    						op3 = k;
+	    	    						num3 = Double.parseDouble(calcs.substring(op2+1, op3));
+	    	    						if (ops == 3) break calcLoop1;
+	    	    						
+	    	    						for (int l = op3+1; l < calcPieces1.length; l++) {
+	    	    	    					char current4 = calcPieces1[l];
+	    	    	    					if (current4 == 'a' || current4 == 's' || current4 == 'm' || current4 == 'd') {
+	    	    	    						op4 = l;
+	    	    	    						num4 = Double.parseDouble(calcs.substring(op3+1, op4));
+	    	    	    						if (ops == 4) break calcLoop1;
+	    	    	    					}
+	    	    	    				}
+	    	    					}
+	    	    				}
+	    					}
+	    				}
+	    			}
+	    		}
+	    		if (ops == 1) {
+	    			num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
+	    			if (calcPieces1[op1] == 'a') {
+		    			work1 = num1 + num2;
+		    		}if (calcPieces1[op1] == 's') {
+		    			work1 = num1 - num2;
+		    		}if (calcPieces1[op1] == 'm') {
+		    			work1 = num1 * num2;
+		    		}if (calcPieces1[op1] == 'd') {
+		    			work1 = num1 / num2;
+		    		}
+		    		endAnswer = work1;
+	    		}
+	    		if (ops == 2) {
+	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
+	    			if (calcPieces1[op1] == 'a') {
+		    			work1 = num1 + num2;
+		    		}if (calcPieces1[op1] == 's') {
+		    			work1 = num1 - num2;
+		    		}if (calcPieces1[op1] == 'm') {
+		    			work1 = num1 * num2;
+		    		}if (calcPieces1[op1] == 'd') {
+		    			work1 = num1 / num2;
+		    		}
+		    		endAnswer = work1;
+	    			num3 = Double.parseDouble(calcs.substring(op2+1, calcs.length()));
+	    			if (calcPieces1[op2] == 'a') {
+		    			work2 = work1 + num3;
+		    		}if (calcPieces1[op2] == 's') {
+		    			work2 = work1 - num3;
+		    		}if (calcPieces1[op2] == 'm') {
+		    			work2 = work1 * num3;
+		    		}if (calcPieces1[op2] == 'd') {
+		    			work2 = work1 / num3;
+		    		}
+		    		endAnswer = work2;
+	    		}
+	    		if (ops == 3) {
+	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
+	    			if (calcPieces1[op1] == 'a') {
+		    			work1 = num1 + num2;
+		    		}if (calcPieces1[op1] == 's') {
+		    			work1 = num1 - num2;
+		    		}if (calcPieces1[op1] == 'm') {
+		    			work1 = num1 * num2;
+		    		}if (calcPieces1[op1] == 'd') {
+		    			work1 = num1 / num2;
+		    		}
+		    		endAnswer = work1;
+	    			num3 = Double.parseDouble(calcs.substring(op2+1, op3));
+	    			if (calcPieces1[op2] == 'a') {
+		    			work2 = work1 + num3;
+		    		}if (calcPieces1[op2] == 's') {
+		    			work2 = work1 - num3;
+		    		}if (calcPieces1[op2] == 'm') {
+		    			work2 = work1 * num3;
+		    		}if (calcPieces1[op2] == 'd') {
+		    			work2 = work1 / num3;
+		    		}
+		    		endAnswer = work2;
+	    			num4 = Double.parseDouble(calcs.substring(op3+1, calcs.length()));
+	    			if (calcPieces1[op3] == 'a') {
+		    			work3 = work2 + num4;
+		    		}if (calcPieces1[op3] == 's') {
+		    			work3 = work2 - num4;
+		    		}if (calcPieces1[op3] == 'm') {
+		    			work3 = work2 * num4;
+		    		}if (calcPieces1[op3] == 'd') {
+		    			work3 = work2 / num4;
+		    		}
+		    		endAnswer = work3;
+	    		}
+	    		if (ops == 4) {
+	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
+	    			if (calcPieces1[op1] == 'a') {
+		    			work1 = num1 + num2;
+		    		}if (calcPieces1[op1] == 's') {
+		    			work1 = num1 - num2;
+		    		}if (calcPieces1[op1] == 'm') {
+		    			work1 = num1 * num2;
+		    		}if (calcPieces1[op1] == 'd') {
+		    			work1 = num1 / num2;
+		    		}
+		    		endAnswer = work1;
+	    			num3 = Double.parseDouble(calcs.substring(op2+1, op3));
+	    			if (calcPieces1[op2] == 'a') {
+		    			work2 = work1 + num3;
+		    		}if (calcPieces1[op2] == 's') {
+		    			work2 = work1 - num3;
+		    		}if (calcPieces1[op2] == 'm') {
+		    			work2 = work1 * num3;
+		    		}if (calcPieces1[op2] == 'd') {
+		    			work2 = work1 / num3;
+		    		}
+		    		endAnswer = work2;
+	    			num4 = Double.parseDouble(calcs.substring(op3+1, op4));
+	    			if (calcPieces1[op3] == 'a') {
+		    			work3 = work2 + num4;
+		    		}if (calcPieces1[op3] == 's') {
+		    			work3 = work2 - num4;
+		    		}if (calcPieces1[op3] == 'm') {
+		    			work3 = work2 * num4;
+		    		}if (calcPieces1[op3] == 'd') {
+		    			work3 = work2 / num4;
+		    		}
+		    		num5 = Double.parseDouble(calcs.substring(op4+1, calcs.length()));
+	    			if (calcPieces1[op4] == 'a') {
+		    			work4 = work3 + num5;
+		    		}if (calcPieces1[op4] == 's') {
+		    			work4 = work3 - num5;
+		    		}if (calcPieces1[op4] == 'm') {
+		    			work4 = work3 * num5;
+		    		}if (calcPieces1[op4] == 'd') {
+		    			work4 = work3 / num5;
+		    		}
+		    		endAnswer = work4;
+	    		}
+	    		calcString = Double.toString(endAnswer);
+	    		calcs = Double.toString(endAnswer);
+	    		calcView.setText(calcString);
+    		}
         }
     	
     	@Override
@@ -241,6 +373,7 @@ public class SocialCalcActivity extends Activity {
     				calcString = calcView.getText().toString() + "3";
     				calcView.setText(calcString);
     				calcs = calcs + "3";
+    				//calcView.setText(calcs);
     			}
     		});
     		fourButton.setOnClickListener(new View.OnClickListener() {
@@ -355,25 +488,26 @@ public class SocialCalcActivity extends Activity {
     	if (calcString.length() > 1) {
 	    	if (!calcString.equals("")) {
 	    		calcString = calcString.substring(0, calcString.length()-1);
-	    		storeCalc(calcString);
+	    		calcs = calcs.substring(0, calcs.length()-1);
 	    	}
     	} else {
     		calcString = "";
+    		calcs = "";
     	}
     	calcView.setText(calcString);
     }
     
     @Override
-    protected void onDestroy() {
-    	super.onDestroy();
-    	TextView calcView = (TextView) findViewById(R.id.calc_bar);
-    	calcString = "";
-		calcView.setText(calcString);
-		mGameSettings = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences bootPref = getSharedPreferences(CALCS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = bootPref.edit();
-        editor.putString("boot", calcs);
+    protected void onPause() {
+    	super.onPause();
+        SharedPreferences calcsPref = getSharedPreferences(CALCS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = calcsPref.edit();
+        editor.putString("calcs", calcs);
         editor.commit();
+        SharedPreferences calcStringPref = getSharedPreferences(CALCSTRING, MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = calcStringPref.edit();
+        editor2.putString("show", calcString);
+        editor2.commit();
     }
     
     public void changeMoreButton(int id) {
