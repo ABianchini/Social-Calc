@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:id="@+id/sinButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/sin"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/cosButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/cos"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/tanButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/tan"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:id="@+id/lnButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/ln"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/logButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/log"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/factorialButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/factorial"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:id="@+id/piButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/pi"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/eButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/e"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/powerButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/power"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+        <Button
+            android:id="@+id/parenOpenButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:text="@string/open_paren"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/parenCloseButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/close_paren"
+            android:background="@color/button_dark_grey" />
+        <Button
+            android:id="@+id/rootButton"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/button_text"
+            android:textColor="@color/white"
+            android:text="@string/root"
+            android:background="@color/button_dark_grey" />
+    </LinearLayout>
+
+</LinearLayout>

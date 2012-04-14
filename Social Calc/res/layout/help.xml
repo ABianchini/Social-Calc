@@ -3,5 +3,31 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+    
+	<ScrollView
+        android:id="@+id/ScrollViewLog"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:isScrollContainer="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true" >
+	    <TextView
+	        android:id="@+id/TextView_HelpText"
+	        android:textColor="@color/grey"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:autoLink="all"
+	        android:isScrollContainer="true"
+	        android:drawablePadding="7dp"
+	        android:textColorLink="@color/grey"
+	        android:linksClickable="true"
+	        android:fadingEdgeLength="25dp"
+	        android:fadingEdge="vertical"
+	        android:scrollbars="vertical"
+	        android:padding="4dp"
+	        android:textSize="@dimen/text"
+	        android:scrollbarStyle="outsideOverlay"
+	        android:bufferType="spannable"></TextView>
+    </ScrollView>
+    
 </LinearLayout>

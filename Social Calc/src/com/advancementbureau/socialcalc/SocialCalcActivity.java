@@ -1,5 +1,7 @@
 package com.advancementbureau.socialcalc;
 
+import java.text.DecimalFormat;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -7,9 +9,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,7 +46,6 @@ public class SocialCalcActivity extends Activity {
         	public boolean onLongClick(View view) {
         		calcString = "";
         		calcView.setText(calcString);
-        		storeCalc("0");
         		calcs = "";
         		return true;
         	}
@@ -93,6 +94,17 @@ public class SocialCalcActivity extends Activity {
     public static class AdvancedFragment extends Fragment {
     	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     		View v = inflater.inflate(R.layout.advanced, container, false);
+    		
+    		Button sinButton = (Button) v.findViewById(R.id.sinButton);
+    		Button cosButton = (Button) v.findViewById(R.id.sinButton);
+    		Button tanButton = (Button) v.findViewById(R.id.sinButton);
+    		Button lnButton = (Button) v.findViewById(R.id.sinButton);
+    		Button logButton = (Button) v.findViewById(R.id.sinButton);
+    		Button factButton = (Button) v.findViewById(R.id.sinButton);
+    		Button piButton = (Button) v.findViewById(R.id.sinButton);
+    		Button eButton = (Button) v.findViewById(R.id.sinButton);
+    		Button powerButton = (Button) v.findViewById(R.id.sinButton);
+    		
     		return v;
     	}
     }
@@ -281,6 +293,9 @@ public class SocialCalcActivity extends Activity {
 		    		}
 		    		endAnswer = work4;
 	    		}
+	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
+	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
+	    		shareString = calcString + " = " + endAnswer;
 	    		calcString = Double.toString(endAnswer);
 	    		calcs = Double.toString(endAnswer);
 	    		calcView.setText(calcString);
@@ -434,12 +449,6 @@ public class SocialCalcActivity extends Activity {
     		});
     		return v;
     	}	
-    }
-    
-    public static void storeCalc(String input) {
-    	z = y;
-    	y = x;
-    	x = Double.parseDouble(input);
     }
     
     
