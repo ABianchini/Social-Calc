@@ -239,13 +239,6 @@ public class SocialCalcActivity extends Activity {
 			    		}if (calcPieces1[op1] == 's') {
 			    			work1 = num1 - num2;
 			    		}
-			    		if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
-			    			if (calcPieces1[op2] == 'm') {
-				    			work2 = work1 * num3;
-				    		}if (calcPieces1[op2] == 'd') {
-				    			work2 = work1 * num3;
-				    		}
-			    		}
 			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
 			    			if (calcPieces1[op2] == 'a') {
 				    			work2 = work1 + num3;
@@ -255,42 +248,124 @@ public class SocialCalcActivity extends Activity {
 			    		}
 	    			}
 		    		endAnswer = work2;
-	    		}/*
-	    		if (ops == 3) {
-	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
-	    			if (calcPieces1[op1] == 'a') {
-		    			work1 = num1 + num2;
-		    		}if (calcPieces1[op1] == 's') {
-		    			work1 = num1 - num2;
-		    		}if (calcPieces1[op1] == 'm') {
-		    			work1 = num1 * num2;
-		    		}if (calcPieces1[op1] == 'd') {
-		    			work1 = num1 / num2;
-		    		}
-		    		endAnswer = work1;
-	    			num3 = Double.parseDouble(calcs.substring(op2+1, op3));
-	    			if (calcPieces1[op2] == 'a') {
-		    			work2 = work1 + num3;
-		    		}if (calcPieces1[op2] == 's') {
-		    			work2 = work1 - num3;
-		    		}if (calcPieces1[op2] == 'm') {
-		    			work2 = work1 * num3;
-		    		}if (calcPieces1[op2] == 'd') {
-		    			work2 = work1 / num3;
-		    		}
-		    		endAnswer = work2;
-	    			num4 = Double.parseDouble(calcs.substring(op3+1, calcs.length()));
-	    			if (calcPieces1[op3] == 'a') {
-		    			work3 = work2 + num4;
-		    		}if (calcPieces1[op3] == 's') {
-		    			work3 = work2 - num4;
-		    		}if (calcPieces1[op3] == 'm') {
-		    			work3 = work2 * num4;
-		    		}if (calcPieces1[op3] == 'd') {
-		    			work3 = work2 / num4;
-		    		}
-		    		endAnswer = work3;
 	    		}
+	    		//TODO FIX THE ALGORITHM!!!
+	    		op3IfState:
+	    		if (ops == 3) {
+	    			num1 = Double.parseDouble(calcs.substring(0, op1));
+	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
+	    			num3 = Double.parseDouble(calcs.substring(op2+1, op3));
+	    			num4 = Double.parseDouble(calcs.substring(op3+1, calcs.length()));
+	    			
+	    			if (calcPieces1[op1] == 'm' || calcPieces1[op1] == 'd') {
+		    			if (calcPieces1[op1] == 'm') {
+			    			work1 = num1 * num2;
+			    		}if (calcPieces1[op1] == 'd') {
+			    			work1 = num1 / num2;
+			    		}
+			    		if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
+			    			if (calcPieces1[op2] == 'm') {
+				    			work2 = work1 * num3;
+				    		}if (calcPieces1[op2] == 'd') {
+				    			work2 = work1 / num3;
+				    		}
+				    		if (calcPieces1[op3] == 'm' || calcPieces1[op3] == 'd') {
+				    			if (calcPieces1[op3] == 'm') {
+					    			work3 = work2 * num4;
+					    		}if (calcPieces1[op3] == 'd') {
+					    			work3 = work2 / num4;
+					    		}
+				    		}
+				    		if (calcPieces1[op3] == 'a' || calcPieces1[op3] == 's') {
+				    			if (calcPieces1[op3] == 's') {
+					    			work3 = work2 - num4;
+					    		}if (calcPieces1[op3] == 'a') {
+					    			work3 = work2 + num4;
+					    		}
+				    		}
+			    		}
+			    		
+			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+			    			if (calcPieces1[op2] == 'a') {
+				    			work2 = work1 + num3;
+				    		}if (calcPieces1[op2] == 's') {
+				    			work2 = work1 - num3;
+				    		}
+				    		if (calcPieces1[op3] == 'm' || calcPieces1[op3] == 'd') {
+				    			if (calcPieces1[op3] == 'm') {
+					    			work3 = work2 * num4;
+					    		}if (calcPieces1[op3] == 'd') {
+					    			work3 = work2 / num4;
+					    		}
+				    		}
+				    		if (calcPieces1[op3] == 'a' || calcPieces1[op3] == 's') {
+				    			if (calcPieces1[op3] == 's') {
+					    			work3 = work2 - num4;
+					    		}if (calcPieces1[op3] == 'a') {
+					    			work3 = work2 + num4;
+					    		}
+				    		}
+			    		}
+		    		}
+	    			
+	    			if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
+		    			if (calcPieces1[op2] == 'm') {
+			    			work2 = num2 * num3;
+			    		}if (calcPieces1[op2] == 'd') {
+			    			work2 = num2 / num3;
+			    		}
+			    		if (calcPieces1[op3] == 'm' || calcPieces1[op3] == 'd') {
+			    			if (calcPieces1[op3] == 'm') {
+				    			work3 = work2 * num4;
+				    		}if (calcPieces1[op3] == 'd') {
+				    			work3 = work2 / num4;
+				    		}
+				    		if (calcPieces1[op1] == 'a' || calcPieces1[op1] == 's') {
+				    			if (calcPieces1[op1] == 'a') {
+					    			work1 = num1 + work3;
+					    		}if (calcPieces1[op1] == 's') {
+					    			work1 = num1 - work3;
+					    		}
+				    		}
+				    		endAnswer = work1;
+				    		break op3IfState;
+			    		} else {
+			    		if (calcPieces1[op1] == 'a' || calcPieces1[op1] == 's') {
+			    			if (calcPieces1[op1] == 'a') {
+				    			work1 = num1 + work2;
+				    		}if (calcPieces1[op1] == 's') {
+				    			work1 = num1 - work2;
+				    		}
+				    		if (calcPieces1[op3] == 'a' || calcPieces1[op3] == 's') {
+				    			if (calcPieces1[op3] == 'a') {
+					    			work3 = work1 + num4;
+					    		}if (calcPieces1[op3] == 's') {
+					    			work3 = work1 - num4;
+					    		}
+				    		}
+				    		break op3IfState;
+			    		}
+			    		}
+		    		}
+	    			//its all right up to here
+	    			//you need a case for op3 being m or d and everything else being a and s
+	    			if (calcPieces1[op1] == 's' || calcPieces1[op1] == 'a') {
+		    			if (calcPieces1[op1] == 'a') {
+			    			work1 = num1 + num2;
+			    		}if (calcPieces1[op1] == 's') {
+			    			work1 = num1 - num2;
+			    		}
+			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+			    			if (calcPieces1[op2] == 'a') {
+				    			work2 = work1 + num3;
+				    		}if (calcPieces1[op2] == 's') {
+				    			work2 = work1 - num3;
+				    		}
+			    		}
+	    			}
+	    			
+		    		endAnswer = work3;
+	    		}/*
 	    		if (ops == 4) {
 	    			num2 = Double.parseDouble(calcs.substring(op1+1, op2));
 	    			if (calcPieces1[op1] == 'a') {
