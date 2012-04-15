@@ -106,7 +106,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1" ><!-- 
         <Button
             android:id="@+id/parenOpenButton"
             android:layout_height="fill_parent"
@@ -115,7 +115,7 @@
             android:text="@string/open_paren"
             android:textSize="@dimen/button_text"
             android:textColor="@color/white"
-            android:background="@color/button_dark_grey" />
+            android:background="@color/button_dark_grey" />-->
         <Button
             android:id="@+id/parenCloseButton"
             android:layout_height="fill_parent"

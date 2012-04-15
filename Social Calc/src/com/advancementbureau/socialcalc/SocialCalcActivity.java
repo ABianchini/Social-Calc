@@ -96,14 +96,104 @@ public class SocialCalcActivity extends Activity {
     		View v = inflater.inflate(R.layout.advanced, container, false);
     		
     		Button sinButton = (Button) v.findViewById(R.id.sinButton);
-    		Button cosButton = (Button) v.findViewById(R.id.sinButton);
-    		Button tanButton = (Button) v.findViewById(R.id.sinButton);
-    		Button lnButton = (Button) v.findViewById(R.id.sinButton);
-    		Button logButton = (Button) v.findViewById(R.id.sinButton);
-    		Button factButton = (Button) v.findViewById(R.id.sinButton);
-    		Button piButton = (Button) v.findViewById(R.id.sinButton);
-    		Button eButton = (Button) v.findViewById(R.id.sinButton);
-    		Button powerButton = (Button) v.findViewById(R.id.sinButton);
+    		Button cosButton = (Button) v.findViewById(R.id.cosButton);
+    		Button tanButton = (Button) v.findViewById(R.id.tanButton);
+    		Button lnButton = (Button) v.findViewById(R.id.lnButton);
+    		Button logButton = (Button) v.findViewById(R.id.logButton);
+    		Button factButton = (Button) v.findViewById(R.id.factorialButton);
+    		Button piButton = (Button) v.findViewById(R.id.piButton);
+    		Button eButton = (Button) v.findViewById(R.id.eButton);
+    		Button powerButton = (Button) v.findViewById(R.id.powerButton);
+    		Button parenCloseButton = (Button) v.findViewById(R.id.parenCloseButton);
+    		Button rootButton = (Button) v.findViewById(R.id.rootButton);
+    		sinButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "sin(";
+    				calcView.setText(calcString);
+    				calcs = calcs + "i";
+    			}
+    		});
+    		cosButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "cos(";
+    				calcView.setText(calcString);
+    				calcs = calcs + "c";
+    			}
+    		});
+    		tanButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "tan(";
+    				calcView.setText(calcString);
+    				calcs = calcs + "t";
+    			}
+    		});
+    		lnButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "ln(";
+    				calcView.setText(calcString);
+    				calcs = calcs + "l";
+    			}
+    		});
+    		logButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "log(";
+    				calcView.setText(calcString);
+    				calcs = calcs + "o";
+    			}
+    		});
+    		factButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "!";
+    				calcView.setText(calcString);
+    				calcs = calcs + "f";
+    			}
+    		});
+    		piButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "PI";
+    				calcView.setText(calcString);
+    				calcs = calcs + "p";
+    			}
+    		});
+    		eButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "e";
+    				calcView.setText(calcString);
+    				calcs = calcs + "e";
+    			}
+    		});
+    		powerButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "^";
+    				calcView.setText(calcString);
+    				calcs = calcs + "u";
+    			}
+    		});
+    		parenCloseButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + ")";
+    				calcView.setText(calcString);
+    				calcs = calcs + "r";
+    			}
+    		});
+    		rootButton.setOnClickListener(new View.OnClickListener() {
+    			public void onClick(View v) {
+    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+    				calcString = calcView.getText().toString() + "^(.5)";
+    				calcView.setText(calcString);
+    				calcs = calcs + "r";
+    			}
+    		});
     		
     		return v;
     	}
@@ -504,7 +594,6 @@ public class SocialCalcActivity extends Activity {
     				calcString = calcView.getText().toString() + "3";
     				calcView.setText(calcString);
     				calcs = calcs + "3";
-    				//calcView.setText(calcs);
     			}
     		});
     		fourButton.setOnClickListener(new View.OnClickListener() {
@@ -613,10 +702,15 @@ public class SocialCalcActivity extends Activity {
     	if (calcString.length() > 1) {
 	    	if (!calcString.equals("")) {
 	    		calcString = calcString.substring(0, calcString.length()-1);
-	    		calcs = calcs.substring(0, calcs.length()-1);
 	    	}
     	} else {
     		calcString = "";
+    	}
+    	if (calcs.length() > 1) {
+    		if(!calcs.equals("")) {
+    			calcs = calcs.substring(0, calcs.length()-1);
+    		}
+    	} else {
     		calcs = "";
     	}
     	calcView.setText(calcString);
