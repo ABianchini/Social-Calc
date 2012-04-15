@@ -40,13 +40,11 @@ public class SocialCalcActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        final TextView calcView = (TextView) findViewById(R.id.calc_bar);
         Button deleteButton = (Button) findViewById(R.id.deleteButton);
         deleteButton.setOnLongClickListener(new View.OnLongClickListener() {
         	public boolean onLongClick(View view) {
-        		calcString = "";
-        		calcView.setText(calcString);
         		calcs = "";
+				display();
         		return true;
         	}
         });
@@ -54,10 +52,8 @@ public class SocialCalcActivity extends Activity {
         if (mGameSettings.contains(CALCS)) {
 			calcs = mGameSettings.getString(CALCS, "");
 		}
-        if (mGameSettings.contains(CALCSTRING)) {
-			calcString = mGameSettings.getString(CALCSTRING, "");
-		}
-        calcView.setText(calcString);
+
+		display();
         
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
@@ -88,7 +84,15 @@ public class SocialCalcActivity extends Activity {
 				ft.commit();
 			}
 		});
-        
+    }
+    
+    protected void onResume() {
+    	super.onResume();
+    	mGameSettings = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
+        if (mGameSettings.contains(CALCS)) {
+			calcs = mGameSettings.getString(CALCS, "");
+		}
+		display();
     }
     
     public static class AdvancedFragment extends Fragment {
@@ -108,94 +112,159 @@ public class SocialCalcActivity extends Activity {
     		Button rootButton = (Button) v.findViewById(R.id.rootButton);
     		sinButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "sin(";
-    				calcView.setText(calcString);
     				calcs = calcs + "i";
+    				display();
     			}
     		});
     		cosButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "cos(";
-    				calcView.setText(calcString);
     				calcs = calcs + "c";
+    				display();
     			}
     		});
     		tanButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "tan(";
-    				calcView.setText(calcString);
     				calcs = calcs + "t";
+    				display();
     			}
     		});
     		lnButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "ln(";
-    				calcView.setText(calcString);
     				calcs = calcs + "l";
+    				display();
     			}
     		});
     		logButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "log(";
-    				calcView.setText(calcString);
     				calcs = calcs + "o";
+    				display();
     			}
     		});
     		factButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "!";
-    				calcView.setText(calcString);
     				calcs = calcs + "f";
+    				display();
     			}
     		});
     		piButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "PI";
-    				calcView.setText(calcString);
     				calcs = calcs + "p";
+    				display();
     			}
     		});
     		eButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "e";
-    				calcView.setText(calcString);
     				calcs = calcs + "e";
+    				display();
     			}
     		});
     		powerButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "^";
-    				calcView.setText(calcString);
     				calcs = calcs + "u";
+    				display();
     			}
     		});
     		parenCloseButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + ")";
-    				calcView.setText(calcString);
-    				calcs = calcs + "r";
+    				calcs = calcs + "b";
+    				display();
     			}
     		});
     		rootButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "^(.5)";
-    				calcView.setText(calcString);
     				calcs = calcs + "r";
+    				display();
     			}
     		});
     		
     		return v;
+    	}
+    	public void display() {
+    		calcString = "";
+    		char[] convertString = calcs.toCharArray();
+			for (int i = 0; i < convertString.length; i++) {
+				char current = convertString[i];
+				if (current == '0') {
+					calcString = calcString + "0";
+				}
+				if (current == '.') {
+					calcString = calcString + ".";
+				}
+				if (current == '1') {
+					calcString = calcString + "1";
+				}
+				if (current == '2') {
+					calcString = calcString + "2";
+				}
+				if (current == '3') {
+					calcString = calcString + "3";
+				}
+				if (current == '4') {
+					calcString = calcString + "4";
+				}
+				if (current == '5') {
+					calcString = calcString + "5";
+				}
+				if (current == '6') {
+					calcString = calcString + "6";
+				}
+				if (current == '7') {
+					calcString = calcString + "7";
+				}
+				if (current == '8') {
+					calcString = calcString + "8";
+				}
+				if (current == '9') {
+					calcString = calcString + "9";
+				}
+				if (current == 'a') {
+					calcString = calcString + "+";
+				}
+				if (current == 's') {
+					calcString = calcString + "-";
+				}
+				if (current == 'd') {
+					calcString = calcString + "/";
+				}
+				if (current == 'm') {
+					calcString = calcString + "x";
+				}
+				if (current == 'i') {
+					calcString = calcString + "sin(";
+				}
+				if (current == 'c') {
+					calcString = calcString + "cos(";
+				}
+				if (current == 't') {
+					calcString = calcString + "tan(";
+				}
+				if (current == 'l') {
+					calcString = calcString + "ln(";
+				}
+				if (current == 'o') {
+					calcString = calcString + "log(";
+				}
+				if (current == 'f') {
+					calcString = calcString + "!";
+				}
+				if (current == 'p') {
+					calcString = calcString + "PI";
+				}
+				if (current == 'e') {
+					calcString = calcString + "e";
+				}
+				if (current == 'u') {
+					calcString = calcString + "^";
+				}
+				if (current == 'b') {
+					calcString = calcString + ")";
+				}
+				if (current == 'r') {
+					calcString = calcString + "^(.5)";
+				}
+			}
+			TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+			calcView.setText(calcString);
     	}
     }
 
@@ -501,10 +570,9 @@ public class SocialCalcActivity extends Activity {
 	    		}*/
 	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
 	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
-	    		shareString = calcString + " = " + endAnswer;
-	    		calcString = Double.toString(endAnswer);
 	    		calcs = Double.toString(endAnswer);
-	    		calcView.setText(calcString);
+	    		display();
+	    		shareString = calcString + " = " + endAnswer;
     		}
         }
     	
@@ -529,34 +597,26 @@ public class SocialCalcActivity extends Activity {
     		Button equalsButton = (Button) v.findViewById(R.id.equalsButton);
     		divideButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "/";
-    				calcView.setText(calcString);
     				calcs = calcs + "d";
+    				display();
     			}
     		});
     		multiplyButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "x";
-    				calcView.setText(calcString);
     				calcs = calcs + "m";
+    				display();
     			}
     		});
     		addButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "+";
-    				calcView.setText(calcString);
     				calcs = calcs + "a";
+    				display();
     			}
     		});
     		subtractButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "-";
-    				calcView.setText(calcString);
     				calcs = calcs + "s";
+    				display();
     			}
     		});
     		equalsButton.setOnClickListener(new View.OnClickListener() {
@@ -566,94 +626,161 @@ public class SocialCalcActivity extends Activity {
     		});
     		zeroButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "0";
-    				calcView.setText(calcString);
     				calcs = calcs + "0";
+    				display();
     			}
     		});
     		oneButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "1";
-    				calcView.setText(calcString);
     				calcs = calcs + "1";
+    				display();
     			}
     		});
     		twoButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "2";
-    				calcView.setText(calcString);
     				calcs = calcs + "2";
+    				display();
     			}
     		});
     		threeButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "3";
-    				calcView.setText(calcString);
     				calcs = calcs + "3";
+    				display();
     			}
     		});
     		fourButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "4";
-    				calcView.setText(calcString);
     				calcs = calcs + "4";
+    				display();
     			}
     		});
     		fiveButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "5";
-    				calcView.setText(calcString);
     				calcs = calcs + "5";
+    				display();
     			}
     		});
     		sixButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "6";
-    				calcView.setText(calcString);
     				calcs = calcs + "6";
+    				display();
     			}
     		});
     		sevenButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "7";
-    				calcView.setText(calcString);
     				calcs = calcs + "7";
+    				display();
     			}
     		});
     		eightButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "8";
-    				calcView.setText(calcString);
     				calcs = calcs + "8";
+    				display();
     			}
     		});
     		nineButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + "9";
-    				calcView.setText(calcString);
     				calcs = calcs + "9";
+    				display();
     			}
     		});
     		pointButton.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View v) {
-    				TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
-    				calcString = calcView.getText().toString() + ".";
-    				calcView.setText(calcString);
     				calcs = calcs + ".";
+    				display();
     			}
     		});
     		return v;
-    	}	
+    	}
+    	
+    	public void display() {
+    		calcString = "";
+    		char[] convertString = calcs.toCharArray();
+			for (int i = 0; i < convertString.length; i++) {
+				char current = convertString[i];
+				if (current == '0') {
+					calcString = calcString + "0";
+				}
+				if (current == '.') {
+					calcString = calcString + ".";
+				}
+				if (current == '1') {
+					calcString = calcString + "1";
+				}
+				if (current == '2') {
+					calcString = calcString + "2";
+				}
+				if (current == '3') {
+					calcString = calcString + "3";
+				}
+				if (current == '4') {
+					calcString = calcString + "4";
+				}
+				if (current == '5') {
+					calcString = calcString + "5";
+				}
+				if (current == '6') {
+					calcString = calcString + "6";
+				}
+				if (current == '7') {
+					calcString = calcString + "7";
+				}
+				if (current == '8') {
+					calcString = calcString + "8";
+				}
+				if (current == '9') {
+					calcString = calcString + "9";
+				}
+				if (current == 'a') {
+					calcString = calcString + "+";
+				}
+				if (current == 's') {
+					calcString = calcString + "-";
+				}
+				if (current == 'd') {
+					calcString = calcString + "/";
+				}
+				if (current == 'm') {
+					calcString = calcString + "x";
+				}
+				if (current == 'i') {
+					calcString = calcString + "sin(";
+				}
+				if (current == 'c') {
+					calcString = calcString + "cos(";
+				}
+				if (current == 't') {
+					calcString = calcString + "tan(";
+				}
+				if (current == 'l') {
+					calcString = calcString + "ln(";
+				}
+				if (current == 'o') {
+					calcString = calcString + "log(";
+				}
+				if (current == 'f') {
+					calcString = calcString + "!";
+				}
+				if (current == 'p') {
+					calcString = calcString + "PI";
+				}
+				if (current == 'e') {
+					calcString = calcString + "e";
+				}
+				if (current == 'u') {
+					calcString = calcString + "^";
+				}
+				if (current == 'b') {
+					calcString = calcString + ")";
+				}
+				if (current == 'r') {
+					calcString = calcString + "^(.5)";
+				}
+			}
+			TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
+			calcView.setText(calcString);
+    	}
+    	
     }
     
     
@@ -697,15 +824,6 @@ public class SocialCalcActivity extends Activity {
         }).show();
     }
     public void onDeleteClick(View v) {
-    	TextView calcView = (TextView) findViewById(R.id.calc_bar);
-    	calcString = calcView.getText().toString();
-    	if (calcString.length() > 1) {
-	    	if (!calcString.equals("")) {
-	    		calcString = calcString.substring(0, calcString.length()-1);
-	    	}
-    	} else {
-    		calcString = "";
-    	}
     	if (calcs.length() > 1) {
     		if(!calcs.equals("")) {
     			calcs = calcs.substring(0, calcs.length()-1);
@@ -713,7 +831,7 @@ public class SocialCalcActivity extends Activity {
     	} else {
     		calcs = "";
     	}
-    	calcView.setText(calcString);
+    	display();
     }
     
     @Override
@@ -723,10 +841,6 @@ public class SocialCalcActivity extends Activity {
         SharedPreferences.Editor editor = calcsPref.edit();
         editor.putString("calcs", calcs);
         editor.commit();
-        SharedPreferences calcStringPref = getSharedPreferences(CALCSTRING, MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = calcStringPref.edit();
-        editor2.putString("show", calcString);
-        editor2.commit();
     }
     
     public void changeMoreButton(int id) {
@@ -738,5 +852,89 @@ public class SocialCalcActivity extends Activity {
     		moreButton.setText("BACK");
     	}
     }
+    public void display() {
+		calcString = "";
+		char[] convertString = calcs.toCharArray();
+		for (int i = 0; i < convertString.length; i++) {
+			char current = convertString[i];
+			if (current == '0') {
+				calcString = calcString + "0";
+			}
+			if (current == '1') {
+				calcString = calcString + "1";
+			}
+			if (current == '2') {
+				calcString = calcString + "2";
+			}
+			if (current == '3') {
+				calcString = calcString + "3";
+			}
+			if (current == '4') {
+				calcString = calcString + "4";
+			}
+			if (current == '5') {
+				calcString = calcString + "5";
+			}
+			if (current == '6') {
+				calcString = calcString + "6";
+			}
+			if (current == '7') {
+				calcString = calcString + "7";
+			}
+			if (current == '8') {
+				calcString = calcString + "8";
+			}
+			if (current == '9') {
+				calcString = calcString + "9";
+			}
+			if (current == 'a') {
+				calcString = calcString + "+";
+			}
+			if (current == 's') {
+				calcString = calcString + "-";
+			}
+			if (current == 'd') {
+				calcString = calcString + "/";
+			}
+			if (current == 'm') {
+				calcString = calcString + "x";
+			}
+			if (current == 'i') {
+				calcString = calcString + "sin(";
+			}
+			if (current == 'c') {
+				calcString = calcString + "cos(";
+			}
+			if (current == 't') {
+				calcString = calcString + "tan(";
+			}
+			if (current == 'l') {
+				calcString = calcString + "ln(";
+			}
+			if (current == 'o') {
+				calcString = calcString + "log(";
+			}
+			if (current == 'f') {
+				calcString = calcString + "!";
+			}
+			if (current == 'p') {
+				calcString = calcString + "PI";
+			}
+			if (current == 'e') {
+				calcString = calcString + "e";
+			}
+			if (current == 'u') {
+				calcString = calcString + "^";
+			}
+			if (current == 'b') {
+				calcString = calcString + ")";
+			}
+			if (current == 'r') {
+				calcString = calcString + "^(.5)";
+			}
+		}
+		TextView calcView = (TextView) findViewById(R.id.calc_bar);
+		calcView.setText(calcString);
+	}
     
  }
