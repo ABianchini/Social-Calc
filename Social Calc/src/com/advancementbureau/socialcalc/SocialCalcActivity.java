@@ -241,7 +241,7 @@ public class SocialCalcActivity extends Activity {
 	    			}
 		    		endAnswer = work2;
 	    		}
-	    		//TODO fix and test
+	    		//All working :)
 	    		op3IfState:
 	    		if (ops == 3) {
 	    			num1 = Double.parseDouble(calcs.substring(0, op1));
@@ -254,6 +254,22 @@ public class SocialCalcActivity extends Activity {
 			    			work1 = num1 * num2;
 			    		}if (calcPieces1[op1] == 'd') {
 			    			work1 = num1 / num2;
+			    		}
+			    		if (calcPieces1[op3] == 'm' || calcPieces1[op3] == 'd') {
+			    			if (calcPieces1[op3] == 'm') {
+				    			work3 = num3 * num4;
+				    		}if (calcPieces1[op3] == 'd') {
+				    			work3 = num3 / num4;
+				    		}
+				    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
+				    			if (calcPieces1[op2] == 'a') {
+					    			work2 = work1 + work3;
+					    		}if (calcPieces1[op2] == 's') {
+					    			work2 = work1 - work3;
+					    		}
+				    		}
+				    		endAnswer = work2;
+				    		break op3IfState;
 			    		}
 			    		if (calcPieces1[op2] == 'm' || calcPieces1[op2] == 'd') {
 			    			if (calcPieces1[op2] == 'm') {
@@ -276,7 +292,6 @@ public class SocialCalcActivity extends Activity {
 					    		}
 				    		}
 			    		}
-			    		
 			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
 			    			if (calcPieces1[op2] == 'a') {
 				    			work2 = work1 + num3;
@@ -335,6 +350,7 @@ public class SocialCalcActivity extends Activity {
 					    			work3 = work1 - num4;
 					    		}
 				    		}
+				    		endAnswer = work3;
 				    		break op3IfState;
 			    		}
 			    		}
