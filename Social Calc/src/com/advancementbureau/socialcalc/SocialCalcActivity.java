@@ -571,8 +571,9 @@ public class SocialCalcActivity extends Activity {
 	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
 	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
 	    		calcs = Double.toString(endAnswer);
-	    		display();
 	    		shareString = calcString + " = " + endAnswer;
+	    		display();
+	    		
     		}
         }
     	
