@@ -295,7 +295,7 @@ public class SocialCalcActivity extends Activity {
     			char[] calcPieces = calcs.toCharArray();
     			for (int i = 0; i < calcPieces.length; i++) {
     				char current = calcPieces[i];
-    				if (current == 'a' || current == 's' || current == 'm' || current == 'd') {
+    				if (current == 'a' || current == 's' || current == 'm' || current == 'd' || current == 'i' || current == 't' || current == 'c') {
     					ops++;
     				}
     			}
@@ -306,20 +306,19 @@ public class SocialCalcActivity extends Activity {
 	    		calcLoop1:
 	    		for (int i = 0; i < calcPieces1.length; i++) {
 	    			char current = calcPieces1[i];
-	    			if (current == 'a' || current == 's' || current == 'm' || current == 'd') {
+	    			if (current == 'a' || current == 's' || current == 'm' || current == 'd' || current == 'i' || current == 'c' || current == 't') {
 	    				op1 = i;
-	    				num1 = Double.parseDouble(calcs.substring(0, op1));
 	    				
 	    				for (int j = op1+1; j < calcPieces1.length; j++) {
 	    					char current2 = calcPieces1[j];
-	    					if (current2 == 'a' || current2 == 's' || current2 == 'm' || current2 == 'd') {
+	    					if (current2 == 'a' || current2 == 's' || current2 == 'm' || current2 == 'd' || current == 'i' || current == 'c' || current == 't') {
 	    						op2 = j;
 	    						num2 = Double.parseDouble(calcs.substring(op1+1, op2));
 	    						if (ops == 2) break calcLoop1;
 	    						
 	    						for (int k = op2+1; k < calcPieces1.length; k++) {
 	    	    					char current3 = calcPieces1[k];
-	    	    					if (current3 == 'a' || current3 == 's' || current3 == 'm' || current3 == 'd') {
+	    	    					if (current3 == 'a' || current3 == 's' || current3 == 'm' || current3 == 'd' || current == 'i' || current == 'c' || current == 't') {
 	    	    						op3 = k;
 	    	    						num3 = Double.parseDouble(calcs.substring(op2+1, op3));
 	    	    						if (ops == 3) break calcLoop1;
@@ -330,8 +329,25 @@ public class SocialCalcActivity extends Activity {
 	    			}
 	    		}
 	    		if (ops == 1) {
+	    			
+	    			if (calcs.substring(0, op1).equals("p")) {
+	    				num1 = Math.PI;
+	    			} else {
+	    				num1 = Double.parseDouble(calcs.substring(0, op1));
+	    			}
+	    			if (calcs.substring(op1+1, calcs.length()).equals("p")) {
+	    				num2 = Math.PI;
+	    			} else {
 	    			num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
-	    			if (calcPieces1[op1] == 'a') {
+	    			}
+	    			
+	    			if (calcPieces1[op1] == 'c') {
+	    				work1 = Math.cos(num2);
+	    			}if (calcPieces1[op1] == 't') {
+	    				work1 = Math.tan(num2);
+	    			}if (calcPieces1[op1] == 'i') {
+	    				work1 = Math.sin(num2);
+	    			}if (calcPieces1[op1] == 'a') {
 		    			work1 = num1 + num2;
 		    		}if (calcPieces1[op1] == 's') {
 		    			work1 = num1 - num2;
@@ -706,6 +722,9 @@ public class SocialCalcActivity extends Activity {
 				if (current == '0') {
 					calcString = calcString + "0";
 				}
+				if (current == '-') {
+					calcString = calcString + "-";
+				}
 				if (current == '.') {
 					calcString = calcString + ".";
 				}
@@ -893,6 +912,9 @@ public class SocialCalcActivity extends Activity {
 			}
 			if (current == '6') {
 				calcString = calcString + "6";
+			}
+			if (current == '-') {
+				calcString = calcString + "-";
 			}
 			if (current == '7') {
 				calcString = calcString + "7";
