@@ -338,15 +338,38 @@ public class SocialCalcActivity extends Activity {
 	    			if (calcs.substring(op1+1, calcs.length()).equals("p")) {
 	    				num2 = Math.PI;
 	    			} else {
-	    			num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
+	    				num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
+	    			}
+	    			
+	    			if (calcs.substring(0, op1).equals("e")) {
+	    				num1 = Math.E;
+	    			} else {
+	    				num1 = Double.parseDouble(calcs.substring(0, op1));
+	    			}
+	    			if (calcs.substring(op1+1, calcs.length()).equals("e")) {
+	    				num2 = Math.E;
+	    			} else {
+	    				num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
 	    			}
 	    			
 	    			if (calcPieces1[op1] == 'c') {
-	    				work1 = Math.cos(num2);
+	    				if (num1 != 0) {
+	    					work1 = num1 * Math.cos(num2);
+	    				} else {
+	    					work1 = Math.cos(num2);
+	    				}
 	    			}if (calcPieces1[op1] == 't') {
-	    				work1 = Math.tan(num2);
+	    				if (num1 != 0) {
+	    					work1 = num1 * Math.cos(num2);
+	    				} else {
+	    					work1 = Math.cos(num2);
+	    				}
 	    			}if (calcPieces1[op1] == 'i') {
-	    				work1 = Math.sin(num2);
+	    				if (num1 != 0) {
+	    					work1 = num1 * Math.cos(num2);
+	    				} else {
+	    					work1 = Math.cos(num2);
+	    				}
 	    			}if (calcPieces1[op1] == 'a') {
 		    			work1 = num1 + num2;
 		    		}if (calcPieces1[op1] == 's') {
