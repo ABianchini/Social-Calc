@@ -1,5 +1,8 @@
 package com.advancementbureau.socialcalc;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 import android.app.Activity;
@@ -36,6 +39,8 @@ public class SocialCalcActivity extends Activity {
 	public static double z;
 	public static String shareString;
 	public static String calcs = "";
+	String FILENAME = "log.txt";
+	File logFile = new File(FILENAME);
 	
 	
     /** Called when the activity is first created. */
@@ -871,13 +876,28 @@ public class SocialCalcActivity extends Activity {
     	//PopUp(R.string.share, R.string.share_info, R.drawable.share);
     	new AlertDialog.Builder(this)
         .setTitle(R.string.share)
-        .setMessage(shareString)
+        .setMessage("If the share function worked this is what would be posted:\n" + shareString)
         .setIcon(R.drawable.share)
-        .setPositiveButton("Close", new OnClickListener() {
+        .setPositiveButton("Log", new OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
+            	
+            }
+        })
+        .setNegativeButton("Close", new OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+            	
             }
         }).show();
     }
+    
+    public void keepLog(String input) throws IOException {
+    	String insertString = null;
+		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND|MODE_PRIVATE);
+		insertString = input + "\n";
+    	fos.write(insertString.getBytes());
+    	fos.close();
+    }
+    
     public void onDeleteClick(View v) {
     	if (calcs.length() > 1) {
     		if(!calcs.equals("")) {
