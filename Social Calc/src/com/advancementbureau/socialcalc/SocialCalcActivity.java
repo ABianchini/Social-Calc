@@ -7,6 +7,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SocialCalcActivity extends Activity {
 	
@@ -271,7 +274,6 @@ public class SocialCalcActivity extends Activity {
     public static class ArithmeticFragment extends Fragment {
     	
     	public void calculate() {
-        	TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
     		double work1 = 0;
     		double work2 = 0;
     		double work3 = 0;
@@ -792,6 +794,7 @@ public class SocialCalcActivity extends Activity {
     	getMenuInflater().inflate(R.menu.mainoptions, menu);
     	menu.findItem(R.id.help_menu_item).setIntent(new Intent(this, HelpActivity.class));
     	menu.findItem(R.id.settings_menu_item).setIntent(new Intent(this, SettingsActivity.class));
+    	menu.findItem(R.id.copy_menu_item);
     	return true;
     }
     @Override
@@ -801,6 +804,13 @@ public class SocialCalcActivity extends Activity {
     			startActivity(item.getIntent()); }
     	if (item.getItemId() == R.id.help_menu_item) {
 			startActivity(item.getIntent()); }
+    	if (item.getItemId() == R.id.copy_menu_item) {
+    		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    		display();
+    		ClipData clip = ClipData.newPlainText("text",calcString);
+    		clipboard.setPrimaryClip(clip);
+    		Toast.makeText(this, "Copied", 500).show();
+    	}
     	return true;
     }
     public void PopUp(int title, int message,int icon){
@@ -860,6 +870,9 @@ public class SocialCalcActivity extends Activity {
 			char current = convertString[i];
 			if (current == '0') {
 				calcString = calcString + "0";
+			}
+			if (current == '.') {
+				calcString = calcString + ".";
 			}
 			if (current == '1') {
 				calcString = calcString + "1";

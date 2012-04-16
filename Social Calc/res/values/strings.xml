@@ -39,6 +39,7 @@
     <string name="open_paren">(</string>
     <string name="close_paren">)</string>
     <string name="root">&#8730;</string>
+    <string name="copy">Copy to Clipboard</string>
     
     
 

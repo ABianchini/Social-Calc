@@ -10,4 +10,8 @@
         android:title="@string/help"
         android:icon="@drawable/help"
         android:showAsAction="always|withText" ></item>
+    <item
+        android:id="@+id/copy_menu_item"
+        android:title="@string/copy"
+        android:showAsAction="never" ></item>
 	</menu>
