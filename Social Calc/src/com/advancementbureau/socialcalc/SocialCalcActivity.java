@@ -359,6 +359,8 @@ public class SocialCalcActivity extends Activity {
 				    		}if (calcPieces1[op2] == 'd') {
 				    			work2 = work1 / num3;
 				    		}
+				    		endAnswer = work2;
+				    		break op2IfState;
 			    		}
 			    		
 			    		if (calcPieces1[op2] == 'a' || calcPieces1[op2] == 's') {
