@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -27,16 +26,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SocialCalcActivity extends Activity {
+public class SocialCalcActivity extends SuperSocialCalcClass {
 	
-	public static final String GAME_PREFERENCES = "GamePrefs";
-	public static final String CALCS = "calcs";
-	public static final String CALCSTRING = "show";
-	SharedPreferences mGameSettings;
 	public static String calcString = "";
-	public static double x;
-	public static double y;
-	public static double z;
 	public static String shareString;
 	public static String calcs = "";
 	String FILENAME = "log.txt";
