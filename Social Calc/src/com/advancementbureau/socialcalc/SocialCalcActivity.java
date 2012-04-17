@@ -293,7 +293,12 @@ public class SocialCalcActivity extends Activity {
     		double endAnswer = 0;
     		
     		if(calcs.length() == 1) {
-    			endAnswer = Double.parseDouble(calcs.substring(0,1));
+    			if (calcs.equals("p") || calcs.equals("e")) {
+    				if (calcs.equals("p")) endAnswer = Math.PI;
+    				if (calcs.equals("e")) endAnswer = Math.E;
+    			} else {
+    				endAnswer = Double.parseDouble(calcs.substring(0,1));
+    			}
     		}
     		
     		if(!calcs.equals("")) {
