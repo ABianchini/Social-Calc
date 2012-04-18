@@ -274,10 +274,10 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
     		double work1 = 0;
     		double work2 = 0;
     		double work3 = 0;
-    		double num1 = 1;
-    		double num2 = 1;
-    		double num3 = 1;
-    		double num4 = 1;
+    		double num1 = 0;
+    		double num2 = 0;
+    		double num3 = 0;
+    		double num4 = 0;
     		int ops = 0;
     		int op1 = 13;
     		int op2 = 13;
@@ -870,8 +870,13 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
         }).show();
     }
     public void onShareClick(View v) {
-    	//PopUp(R.string.share, R.string.share_info, R.drawable.share);
-    	new AlertDialog.Builder(this)
+    	AlertDialog.Builder builder;
+    	AlertDialog alertDialog;
+    	
+    	Context mContent = getApplicationContext();
+    	//LayoutInflater
+    	
+    	/*new AlertDialog.Builder(this)
         .setTitle(R.string.share)
         .setMessage("If the share function worked this is what would be posted:\n" + shareString)
         .setIcon(R.drawable.share)
@@ -884,7 +889,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
             public void onClick(DialogInterface arg0, int arg1) {
             	
             }
-        }).show();
+        }).show();*/
     }
     
     public void keepLog(String input) throws IOException {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="genders">
+        <item>@string/one</item>
+        <item>@string/two</item>
+    </string-array>
+</resources>
