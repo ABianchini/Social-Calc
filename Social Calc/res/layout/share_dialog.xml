@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_root"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="7dp" >
 
     <TextView
         android:id="@+id/preTextPrompt_TextView"
@@ -14,18 +15,22 @@
 
     <Spinner
         android:id="@+id/PreText_Spinner"
-        android:entries="@array/pre_text"
+        android:prompt="@string/pick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+<!-- 
     <TextView
         android:id="@+id/ShareTextPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/share_text_prompt" />
+        android:text="@string/share_text_prompt" />-->
 
     <TextView
         android:id="@+id/ShareText"
+        android:textSize="18dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
@@ -39,7 +44,7 @@
     <Spinner
         android:id="@+id/Network_Spinner"
         android:layout_width="match_parent"
-        android:entries="@array/network"
+        android:prompt="@string/pick"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -30,10 +31,8 @@ import android.widget.Toast;
 public class SocialCalcActivity extends SuperSocialCalcClass {
 	
 	public static String calcString = "";
-	public static String shareString;
+	public static String shareString = "You haven\'t done a calculation yet.";
 	public static String calcs = "";
-	String FILENAME = "log.txt";
-	File logFile = new File(FILENAME);
 	
 	
     /** Called when the activity is first created. */
@@ -830,10 +829,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 			TextView calcView = (TextView) getActivity().findViewById(R.id.calc_bar);
 			calcView.setText(calcString);
     	}
-    	
     }
-    
-    
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -871,9 +867,6 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
         }).show();
     }
     public void onShareClick(View v) {
-    	AlertDialog.Builder builder;
-    	AlertDialog alertDialog;
-    	
     	Context mContext = getApplicationContext();
     	LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
     	View layout = inflater.inflate(R.layout.share_dialog, (ViewGroup) findViewById(R.id.layout_root));
@@ -881,45 +874,47 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
     	TextView shareText = (TextView) layout.findViewById(R.id.ShareText);
     	shareText.setText(shareString);
     	
-    	Spinner preTextSpinner = (Spinner) findViewById(R.id.PreText_Spinner);
-		ArrayAdapter<?> preTextAdapter = ArrayAdapter.createFromResource(this, R.array.pre_text, android.R.layout.simple_spinner_item);
-		preTextAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		preTextSpinner.setAdapter(preTextAdapter);
-		preTextSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
-				preTextChoice = selectedItemPosition;
+    	Spinner preTextSpinner = (Spinner) layout.findViewById(R.id.PreText_Spinner);
+        ArrayAdapter<CharSequence> preTextAdapter = ArrayAdapter.createFromResource(this, R.array.pre_text, android.R.layout.simple_spinner_item);
+        preTextAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        preTextSpinner.setAdapter(preTextAdapter);
+    	class PreTextItemSelectedListener implements OnItemSelectedListener {
+    	    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    	    	preTextChoice = pos;
+    	    }
+			public void onNothingSelected(AdapterView<?> arg0) {
 			}
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-		
-		Spinner networkSpinner = (Spinner) findViewById(R.id.Network_Spinner);
-		ArrayAdapter<?> networkAdapter = ArrayAdapter.createFromResource(this, R.array.network, android.R.layout.simple_spinner_item);
-		networkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		networkSpinner.setAdapter(networkAdapter);
-		networkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
-				networkChoice = selectedItemPosition;
-			}
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
+    	}
+    	preTextSpinner.getPrompt();
+    	preTextSpinner.setOnItemSelectedListener(new PreTextItemSelectedListener());
     	
-    	builder = new AlertDialog.Builder(mContext);
-    	builder.setView(layout)
-    		.setTitle(R.string.share)
-    		.setIcon(R.drawable.share)
-    		.setPositiveButton("Share", new OnClickListener() {
-    			public void onClick(DialogInterface arg0, int arg1) {
-    				shareIt(preTextChoice, networkChoice);
-    			}
-    		})
-    		.setNegativeButton("Nevermind", new OnClickListener() {
-    			public void onClick(DialogInterface arg0, int arg1) {
-    				
-    			}
-    		});
-    	alertDialog = builder.create();
+    	Spinner networkSpinner = (Spinner) layout.findViewById(R.id.Network_Spinner);
+        ArrayAdapter<CharSequence> netAdapter = ArrayAdapter.createFromResource(this, R.array.network, android.R.layout.simple_spinner_item);
+        netAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        networkSpinner.setAdapter(netAdapter);
+    	class NetworkItemSelectedListener implements OnItemSelectedListener {
+    	    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+    	      networkChoice = pos;
+    	    }
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+    	}
+    	networkSpinner.getPrompt();
+    	networkSpinner.setOnItemSelectedListener(new NetworkItemSelectedListener());
+		
+		new AlertDialog.Builder(this)
+        .setTitle(R.string.share)
+        .setIcon(R.drawable.share)
+        .setView(layout)
+        .setPositiveButton("Share", new OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+            	shareIt(preTextChoice, networkChoice);
+            	Toast.makeText(getApplicationContext(), "Not shared", 1000).show();
+            }
+        }).setNegativeButton("Nevermind", new OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+			}
+        }).show();
     }
     
     public void onDeleteClick(View v) {
