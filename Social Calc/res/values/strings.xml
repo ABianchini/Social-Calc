@@ -41,6 +41,12 @@
     <string name="root">&#8730;</string>
     <string name="copy">Copy to Clipboard</string>
     <string name="pre_text_prompt">Select pre operation phrase:</string>
+    <string name="share_text_prompt">If the share function worked this is what would be posted:</string>
+    <string name="network_prompt">Pick your Social medium:</string>
+    <string name="twitter">Twitter</string>
+    <string name="more_to_come">More to come...</string>
+    <string name="doesnt_know">*User* doesn\'t know </string>
+    <string name="just_did">*User* just calculated </string>
     
     
 

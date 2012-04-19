@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array
-        name="genders">
-        <item>@string/one</item>
-        <item>@string/two</item>
+        name="pre_text">
+        <item>@string/doesnt_know</item>
+        <item>@string/just_did</item>
+    </string-array>
+    <string-array
+        name="network">
+        <item>@string/twitter</item>
+        <item>@string/more_to_come</item>
     </string-array>
 </resources>

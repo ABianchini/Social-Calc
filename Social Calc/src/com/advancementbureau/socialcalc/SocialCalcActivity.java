@@ -1,8 +1,6 @@
 package com.advancementbureau.socialcalc;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 
 import android.app.AlertDialog;
@@ -22,7 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -873,31 +874,52 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
     	AlertDialog.Builder builder;
     	AlertDialog alertDialog;
     	
-    	Context mContent = getApplicationContext();
-    	//LayoutInflater
+    	Context mContext = getApplicationContext();
+    	LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
+    	View layout = inflater.inflate(R.layout.share_dialog, (ViewGroup) findViewById(R.id.layout_root));
     	
-    	/*new AlertDialog.Builder(this)
-        .setTitle(R.string.share)
-        .setMessage("If the share function worked this is what would be posted:\n" + shareString)
-        .setIcon(R.drawable.share)
-        .setPositiveButton("Log", new OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-            	
-            }
-        })
-        .setNegativeButton("Close", new OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-            	
-            }
-        }).show();*/
-    }
-    
-    public void keepLog(String input) throws IOException {
-    	String insertString = null;
-		FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_APPEND|MODE_PRIVATE);
-		insertString = input + "\n";
-    	fos.write(insertString.getBytes());
-    	fos.close();
+    	TextView shareText = (TextView) layout.findViewById(R.id.ShareText);
+    	shareText.setText(shareString);
+    	
+    	Spinner preTextSpinner = (Spinner) findViewById(R.id.PreText_Spinner);
+		ArrayAdapter<?> preTextAdapter = ArrayAdapter.createFromResource(this, R.array.pre_text, android.R.layout.simple_spinner_item);
+		preTextAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		preTextSpinner.setAdapter(preTextAdapter);
+		preTextSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
+				preTextChoice = selectedItemPosition;
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+		
+		Spinner networkSpinner = (Spinner) findViewById(R.id.Network_Spinner);
+		ArrayAdapter<?> networkAdapter = ArrayAdapter.createFromResource(this, R.array.network, android.R.layout.simple_spinner_item);
+		networkAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		networkSpinner.setAdapter(networkAdapter);
+		networkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
+				networkChoice = selectedItemPosition;
+			}
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+    	
+    	builder = new AlertDialog.Builder(mContext);
+    	builder.setView(layout)
+    		.setTitle(R.string.share)
+    		.setIcon(R.drawable.share)
+    		.setPositiveButton("Share", new OnClickListener() {
+    			public void onClick(DialogInterface arg0, int arg1) {
+    				shareIt(preTextChoice, networkChoice);
+    			}
+    		})
+    		.setNegativeButton("Nevermind", new OnClickListener() {
+    			public void onClick(DialogInterface arg0, int arg1) {
+    				
+    			}
+    		});
+    	alertDialog = builder.create();
     }
     
     public void onDeleteClick(View v) {
@@ -1019,5 +1041,10 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 		TextView calcView = (TextView) findViewById(R.id.calc_bar);
 		calcView.setText(calcString);
 	}
+    
+    public void shareIt(int pre, int network) {
+    	preTextChoice = pre;
+    	networkChoice = network;
+    }
     
  }
