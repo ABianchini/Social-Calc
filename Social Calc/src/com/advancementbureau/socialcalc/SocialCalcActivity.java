@@ -310,6 +310,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	    			char current = calcPieces1[i];
 	    			if (current == 'a' || current == 's' || current == 'm' || current == 'd' || current == 'i' || current == 'c' || current == 't') {
 	    				op1 = i;
+	    				if (ops == 1) break calcLoop1;
 	    				
 	    				for (int j = op1+1; j < calcPieces1.length; j++) {
 	    					char current2 = calcPieces1[j];
@@ -332,25 +333,20 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	    		}
 	    		if (ops == 1) {
 	    			
-	    			if (calcs.substring(0, op1).equals("p")) {
-	    				num1 = Math.PI;
+	    			if (calcs.substring(0, op1).equals("p") || calcs.substring(0, op1).equals("e")) {
+	    				if(calcs.substring(0, op1).equals("p")) num1 = Math.PI;
+	    				if(calcs.substring(0, op1).equals("e")) num1 = Math.E;
 	    			} else {
-	    				num1 = Double.parseDouble(calcs.substring(0, op1));
+	    				if (!calcs.substring(0, op1+1).equals("a") && !calcs.substring(0, op1+1).equals("s") && !calcs.substring(0, op1+1).equals("m") && !calcs.substring(0, op1+1).equals("d") && !calcs.substring(0, op1+1).equals("i") && !calcs.substring(0, op1+1).equals("t") && !calcs.substring(0, op1+1).equals("c")) { 
+	    					num1 = Double.parseDouble(calcs.substring(0, op1));
+	    				}
 	    			}
-	    			if (calcs.substring(op1+1, calcs.length()).equals("p")) {
-	    				num2 = Math.PI;
+	    			if (calcs.substring(op1+1, calcs.length()).equals("p") || calcs.substring(op1+1, calcs.length()).equals("e")) {
+	    				if(calcs.substring(op1+1, calcs.length()).equals("p")) num2 = Math.PI;
+	    				if(calcs.substring(op1+1, calcs.length()).equals("e")) num2 = Math.E;
 	    			} else {
-	    				num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
-	    			}
-	    			
-	    			if (calcs.substring(0, op1).equals("e")) {
-	    				num1 = Math.E;
-	    			} else {
-	    				num1 = Double.parseDouble(calcs.substring(0, op1));
-	    			}
-	    			if (calcs.substring(op1+1, calcs.length()).equals("e")) {
-	    				num2 = Math.E;
-	    			} else {
+	    				/*if (!calcs.substring(0, op1+1).equals("a") && !calcs.substring(0, op1+1).equals("s") && !calcs.substring(0, op1+1).equals("m") && !calcs.substring(0, op1+1).equals("d") && !calcs.substring(0, op1+1).equals("i") && !calcs.substring(0, op1+1).equals("t") && !calcs.substring(0, op1+1).equals("c")) {
+	    				}*/
 	    				num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
 	    			}
 	    			
@@ -362,15 +358,15 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	    				}
 	    			}if (calcPieces1[op1] == 't') {
 	    				if (num1 != 0) {
-	    					work1 = num1 * Math.cos(num2);
+	    					work1 = num1 * Math.tan(num2);
 	    				} else {
-	    					work1 = Math.cos(num2);
+	    					work1 = Math.tan(num2);
 	    				}
 	    			}if (calcPieces1[op1] == 'i') {
 	    				if (num1 != 0) {
-	    					work1 = num1 * Math.cos(num2);
+	    					work1 = num1 * Math.sin(num2);
 	    				} else {
-	    					work1 = Math.cos(num2);
+	    					work1 = Math.sin(num2);
 	    				}
 	    			}if (calcPieces1[op1] == 'a') {
 		    			work1 = num1 + num2;
