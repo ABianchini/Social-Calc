@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header android:fragment="com.advacementbureau.socialcalc.SettingsActivity$MathPrefs"
-            android:icon="@drawable/share"
+            android:icon="@drawable/math"
             android:title="Math" />
     
 </preference-headers>

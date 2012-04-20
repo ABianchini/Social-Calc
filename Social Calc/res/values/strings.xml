@@ -48,6 +48,13 @@
     <string name="doesnt_know">*User* doesn\'t know </string>
     <string name="just_did">*User* just calculated </string>
     <string name="pick">Pick one</string>
+    <string name="rad_deg">Radians/Degrees</string>
+    <string name="rad_deg_info">Choose to run triginometitric functions in Degree or Radian mode</string>
+    <string name="rad">Rad</string>
+    <string name="deg">Deg</string>
+    <string name="math">Math</string>
+    <string name="dec">Decimal Place</string>
+    <string name="dec_info">Set the number of decimal places the calculator will round to</string>
     
 
 </resources>
