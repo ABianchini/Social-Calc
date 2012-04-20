@@ -1,23 +1,36 @@
 package com.advancementbureau.socialcalc;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.view.MenuItem;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
+	
     /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.settings);
-        if (Build.VERSION.SDK_INT >= 11) {
-	        ActionBar actionBar2 = getActionBar();
-	        actionBar2.setDisplayHomeAsUpEnabled(true);
+
+        // Display the fragment as the main content.
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+    }
+
+
+    public static class PrefsFragment extends PreferenceFragment {
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
         }
-        addPreferencesFromResource(R.xml.preferences);
     }
     
     @Override
@@ -29,4 +42,9 @@ public class SettingsActivity extends PreferenceActivity {
 			startActivity(intent2); }
     	return true;
     }
+
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		
+		
+	}
 }
