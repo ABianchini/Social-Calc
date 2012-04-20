@@ -16,4 +16,10 @@
         <item>@string/five</item>
         <item>@string/six</item>
     </string-array>
+    <string-array name="dec_values">
+        <item>three</item>
+        <item>four</item>
+        <item>five</item>
+        <item>six</item>
+    </string-array>
 </resources>

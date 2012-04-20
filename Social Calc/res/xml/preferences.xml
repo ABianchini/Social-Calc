@@ -19,7 +19,9 @@
             android:entries="@array/decimal"
             android:dialogTitle="@string/dec"
             android:title="@string/dec"
-            android:summary="@string/dec_info" />
+            android:summary="@string/dec_info"
+            android:entryValues="@array/dec_values"
+            android:defaultValue="four" />
 
     </PreferenceCategory>
 </PreferenceScreen>
