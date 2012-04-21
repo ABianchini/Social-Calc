@@ -55,6 +55,10 @@
     <string name="math">Math</string>
     <string name="dec">Decimal Place</string>
     <string name="dec_info">Set the number of decimal places the calculator will round to</string>
+    <string name="auth">Authorize</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="twitter_login">Twitter Login</string>
     
 
 </resources>
