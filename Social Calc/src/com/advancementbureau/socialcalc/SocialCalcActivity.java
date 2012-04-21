@@ -2,7 +2,6 @@ package com.advancementbureau.socialcalc;
 
 import java.text.DecimalFormat;
 
-import winterwell.jtwitter.Twitter;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +11,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,12 +25,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import api.Twitter;
 
-public class SocialCalcActivity extends SuperSocialCalcClass {
+public class SocialCalcActivity extends SuperSocialCalcClass implements OnDismissListener {
 	
 	public static String calcString = "";
 	public static String shareString = "You haven\'t done a calculation yet.";
@@ -38,7 +38,10 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	public static int decPlace = 4;
 	public static boolean radDeg;
 	public static boolean twitterLogIn = false;
-	
+	private Twitter twitter;
+	final String consumerKey = "5Uq334X9fAM9k4RStEpOA";
+	final String consumerSecret = "evwBErwNeNmxkZrKkbkZUwrWYS1LtbSLsWMcaILyPU";
+	final String callbackURL = "http://www.someurl.com";
 	
 	
     /** Called when the activity is first created. */
@@ -958,6 +961,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
         .setPositiveButton("Share", new OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
             	shareIt(preTextChoice, networkChoice);
+            	
             	Toast.makeText(getApplicationContext(), "Not shared", 1000).show();
             	
             }
@@ -1092,39 +1096,12 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
     public void shareIt(int pre, int network) {
     	preTextChoice = pre;
     	networkChoice = network;
-    	SharedPreferences bootPref = getSharedPreferences(TWIT_LOGIN, MODE_PRIVATE);
-        SharedPreferences.Editor editor = bootPref.edit();
-        Context mContext = getApplicationContext();
-    	LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-    	View layout = inflater.inflate(R.layout.twitter_login_dialog, (ViewGroup) findViewById(R.id.layout_root));
-    	
-    	final EditText userName = (EditText) layout.findViewById(R.id.UsernameTwitter);
-    	final EditText password = (EditText) layout.findViewById(R.id.PasswordTwitter);
-        
-    	if (bootPref.getBoolean(TWIT_LOGIN, false)) {
-    		
-    	} else {
-    		new AlertDialog.Builder(this)
-            .setTitle(R.string.twitter_login)
-            .setIcon(R.drawable.twitter_logo)
-            .setView(layout)
-            .setPositiveButton("Login", new OnClickListener() {
-                @SuppressWarnings("unused")
-				public void onClick(DialogInterface arg0, int arg1) {
-                	Twitter my_twitter = new Twitter(userName.getText().toString(), password.getText().toString());
-                	if(my_twitter == null) {
-                		Toast.makeText(getApplicationContext(), "Incorrect Login", 1000).show();
-                	} else {
-                		Toast.makeText(getApplicationContext(), "Logged in", 1000).show();
-                	}
-                }
-            }).setNegativeButton("Nevermind", new OnClickListener() {
-    			public void onClick(DialogInterface arg0, int arg1) {
-    			}
-            }).show();
-    		
-        	editor.putBoolean("boot", twitterLogIn);
-            editor.commit();
-        }
+    	twitter = new Twitter(this, consumerKey, consumerSecret, callbackURL);
+    	twitter.showAuthorization().setOnDismissListener(this);
+    
     }
+
+	public void onDismiss(DialogInterface dialog) {
+		
+	}
  }
