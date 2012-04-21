@@ -20,15 +20,15 @@ public class HelpActivity extends Activity {
         setContentView(R.layout.help);
         if (Build.VERSION.SDK_INT >= 11) {
 	        ActionBar actionBar2 = getActionBar();
-	        actionBar2.setDisplayHomeAsUpEnabled(true);
-	        InputStream iFile = getResources().openRawResource(R.raw.help);
-	        try {
-	        	TextView changeLog = (TextView) findViewById(R.id.TextView_HelpText);
-	        	String strFile = inputStreamToString(iFile);
-	        	changeLog.setText(strFile);
-	        } catch (Exception e) {
-	        }
-	    }
+	        actionBar2.setDisplayHomeAsUpEnabled(true);  
+	    } 
+        InputStream iFile = getResources().openRawResource(R.raw.help);
+        try {
+        	TextView changeLog = (TextView) findViewById(R.id.TextView_HelpText);
+        	String strFile = inputStreamToString(iFile);
+        	changeLog.setText(strFile);
+        } catch (Exception e) {
+        }
     }
 	    
     public String inputStreamToString(InputStream is) throws IOException {

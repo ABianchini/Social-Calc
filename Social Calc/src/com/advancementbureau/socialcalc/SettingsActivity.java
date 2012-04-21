@@ -1,13 +1,13 @@
 package com.advancementbureau.socialcalc;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.SwitchPreference;
 import android.view.MenuItem;
 
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener {
@@ -19,6 +19,10 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+        if (Build.VERSION.SDK_INT >= 11) {
+	        ActionBar actionBar2 = getActionBar();
+	        actionBar2.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 

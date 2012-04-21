@@ -1,6 +1,5 @@
 package com.advancementbureau.socialcalc;
 
-import java.io.File;
 import java.text.DecimalFormat;
 
 import android.app.AlertDialog;
@@ -15,6 +14,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +33,8 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	public static String calcString = "";
 	public static String shareString = "You haven\'t done a calculation yet.";
 	public static String calcs = "";
+	public static int decPlace = 4;
+	public static boolean radDeg;
 	
 	
     /** Called when the activity is first created. */
@@ -92,6 +94,21 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
         if (mGameSettings.contains(CALCS)) {
 			calcs = mGameSettings.getString(CALCS, "");
 		}
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String tempDec = sharedPrefs.getString("list_decimal", "four");
+        if (tempDec.equals("four")) {
+        	decPlace = 4;
+        }
+        if (tempDec.equals("five")) {
+        	decPlace = 5;
+        }
+        if (tempDec.equals("six")) {
+        	decPlace = 6;
+        }
+        if (tempDec.equals("three")) {
+        	decPlace = 3;
+        }
+        radDeg = sharedPrefs.getBoolean("switch_rad_deg", true);
 		display();
     }
     
@@ -189,6 +206,9 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 				}
 				if (current == '.') {
 					calcString = calcString + ".";
+				}
+				if (current == '-') {
+					calcString = calcString + "-";
 				}
 				if (current == '1') {
 					calcString = calcString + "1";
@@ -345,28 +365,50 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	    				if(calcs.substring(op1+1, calcs.length()).equals("p")) num2 = Math.PI;
 	    				if(calcs.substring(op1+1, calcs.length()).equals("e")) num2 = Math.E;
 	    			} else {
-	    				/*if (!calcs.substring(0, op1+1).equals("a") && !calcs.substring(0, op1+1).equals("s") && !calcs.substring(0, op1+1).equals("m") && !calcs.substring(0, op1+1).equals("d") && !calcs.substring(0, op1+1).equals("i") && !calcs.substring(0, op1+1).equals("t") && !calcs.substring(0, op1+1).equals("c")) {
-	    				}*/
 	    				num2 = Double.parseDouble(calcs.substring(op1+1, calcs.length()));
 	    			}
 	    			
 	    			if (calcPieces1[op1] == 'c') {
-	    				if (num1 != 0) {
-	    					work1 = num1 * Math.cos(num2);
+	    				if (radDeg){
+		    				if (num1 != 0) {
+		    					work1 = num1 * Math.cos(num2);
+		    				} else {
+		    					work1 = Math.cos(num2);
+		    				}
 	    				} else {
-	    					work1 = Math.cos(num2);
+	    					if (num1 != 0) {
+		    					work1 = num1 * Math.cos(Math.toRadians(num2));
+		    				} else {
+		    					work1 = Math.cos(Math.toRadians(num2));
+		    				}
 	    				}
 	    			}if (calcPieces1[op1] == 't') {
-	    				if (num1 != 0) {
-	    					work1 = num1 * Math.tan(num2);
+	    				if (radDeg){
+		    				if (num1 != 0) {
+		    					work1 = num1 * Math.tan(num2);
+		    				} else {
+		    					work1 = Math.tan(num2);
+		    				}
 	    				} else {
-	    					work1 = Math.tan(num2);
+	    					if (num1 != 0) {
+		    					work1 = num1 * Math.tan(Math.toRadians(num2));
+		    				} else {
+		    					work1 = Math.tan(Math.toRadians(num2));
+		    				}
 	    				}
 	    			}if (calcPieces1[op1] == 'i') {
-	    				if (num1 != 0) {
-	    					work1 = num1 * Math.sin(num2);
+	    				if (radDeg){
+		    				if (num1 != 0) {
+		    					work1 = num1 * Math.sin(num2);
+		    				} else {
+		    					work1 = Math.sin(num2);
+		    				}
 	    				} else {
-	    					work1 = Math.sin(num2);
+	    					if (num1 != 0) {
+		    					work1 = num1 * Math.sin(num2);
+		    				} else {
+		    					work1 = Math.sin(Math.toRadians(num2));
+		    				}
 	    				}
 	    			}if (calcPieces1[op1] == 'a') {
 		    			work1 = num1 + num2;
@@ -604,17 +646,24 @@ public class SocialCalcActivity extends SuperSocialCalcClass {
 	    		}
 	    		if (ops == 4) {
 	    			endAnswer = 0;
-	    		}/*
-	    		if (ops == 5) {
-	    			calcString = "";
-	    			calcs = "";
-	    		}*/
-	    		DecimalFormat fourDForm = new DecimalFormat("#.#####");
-	    		endAnswer = Double.valueOf(fourDForm.format(endAnswer));
+	    		}
+	    		switch (decPlace) {
+	    		case 3: DecimalFormat threeDForm = new DecimalFormat("#.###");
+	    				endAnswer = Double.valueOf(threeDForm.format(endAnswer));
+	    				break;
+	    		case 4: DecimalFormat fourDForm = new DecimalFormat("#.####");
+	    				endAnswer = Double.valueOf(fourDForm.format(endAnswer));
+	    				break;
+	    		case 5: DecimalFormat fiveDForm = new DecimalFormat("#.#####");
+	    				endAnswer = Double.valueOf(fiveDForm.format(endAnswer));
+	    				break;
+	    		case 6: DecimalFormat sixDForm = new DecimalFormat("#.######");
+	    				endAnswer = Double.valueOf(sixDForm.format(endAnswer));
+	    				break;
+	    		}
 	    		calcs = Double.toString(endAnswer);
 	    		shareString = calcString + " = " + endAnswer;
 	    		display();
-	    		
     		}
         }
     	
