@@ -11,7 +11,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,18 +29,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import api.Twitter;
 
-public class SocialCalcActivity extends SuperSocialCalcClass implements OnDismissListener {
+public class SocialCalcActivity extends SuperSocialCalcClass {
 	
 	public static String calcString = "";
 	public static String shareString = "You haven\'t done a calculation yet.";
 	public static String calcs = "";
 	public static int decPlace = 4;
 	public static boolean radDeg;
-	public static boolean twitterLogIn = false;
-	private Twitter twitter;
-	final String consumerKey = "5Uq334X9fAM9k4RStEpOA";
-	final String consumerSecret = "evwBErwNeNmxkZrKkbkZUwrWYS1LtbSLsWMcaILyPU";
-	final String callbackURL = "http://www.someurl.com";
+	final String consumerKey = "IQ8fpZQYcfgJsTFeM8yeDA";
+	final String consumerSecret = "zEZAThtSlRakbZFbMKeYEWeTiB3QZ5xEkhQwg2pcVVU";
+	final String callbackURL = "http://someurl.com";
+	Twitter twitter;
 	
 	
     /** Called when the activity is first created. */
@@ -62,6 +60,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass implements OnDismis
 			calcs = mGameSettings.getString(CALCS, "");
 		}
 
+        //Twitter twitter = new Twitter(this, consumerKey, consumerSecret, callbackURL);
 		display();
         
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -1096,12 +1095,7 @@ public class SocialCalcActivity extends SuperSocialCalcClass implements OnDismis
     public void shareIt(int pre, int network) {
     	preTextChoice = pre;
     	networkChoice = network;
-    	twitter = new Twitter(this, consumerKey, consumerSecret, callbackURL);
-    	twitter.showAuthorization().setOnDismissListener(this);
-    
+    	
+    	//if (!twitter.isAuthorized()) twitter.showAuthorization();
     }
-
-	public void onDismiss(DialogInterface dialog) {
-		
-	}
  }
